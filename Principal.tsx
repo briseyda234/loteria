@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, SafeAreaView, Text, Button, StyleSheet, Image, View, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Sound from 'react-native-sound';
 import Menu from './src/menu';
 import Dificultad from './src/dificultad';  // Asegúrate de tener la ruta correcta
 // Crear el stack de navegación
 const Stack = createStackNavigator();
+//cargar audio previamente
+const backgroundMusic=new Sound(require('./assets/audio/audio.mp3'),Sound.MAIN_BUNDLE,(error)=>{
+  if(error){
+    console.log('error al cargar el sonido',error);
+    return;
+  }
+  backgroundMusic.setNumberOfLoops(-1);
+});
+
+
 
 // Pantalla de inicio (HomeScreen)
-function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisible: boolean; setModalVisible: (visible: boolean) => void; navigation: any }) {
+function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisible: boolean; setModalVisible: (visible: boolean) => void; navigation: any}) {
   return (
     <SafeAreaView style={styles.container}>
       {/* Contenedor del título */}
@@ -30,8 +41,7 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
             <Image source={require('./assets/images/img1.png')} style={styles.modalImage} />
             <Text style={styles.title}>Créditos</Text>
             <Text style={styles.text}>Proyecto Dirigido: {"\n"}M.A.V. Martha P. Luna González</Text>
-            <Text style={styles.text}>Desarrollado por: {"\n"}Briseyda Silva Lopez</Text>
-            <Text style={styles.text}>Leydi Francisca Vazquez Camacho</Text>
+            <Text style={styles.text}>Desarrollado por: {"\n"}Briseyda Silva Lopez{"\n"}Leydi Francisca Vazquez Camacho</Text>
             <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación</Text>
             <Text style={styles.text}>Versión: 1.0 </Text>
             <Button title="Cerrar" onPress={() => setModalVisible(false)} color="#ff6347" />
@@ -42,28 +52,25 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
   );
 }
 
-// Segunda pantalla (SecondScreen)
-function SecondScreen({ navigation }: { navigation: any }) {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>¡Has llegado a la segunda pantalla!</Text>
-      <Button title="Ir a la tercera pantalla" onPress={() => navigation.navigate('ThirdScreen')} />
-    </SafeAreaView>
-  );
-}
-
-// Nueva tercera pantalla (ThirdScreen)
-function ThirdScreen() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>¡Estás en la tercera pantalla!</Text>
-    </SafeAreaView>
-  );
-}
 
 // Componente principal de la app
 function Principal() {
   const [modalVisible, setModalVisible] = useState(false);
+  const[isPlaying,setIsPlaying]=useState(true);
+//funcion para reproducir /pausar la musica
+
+
+
+
+// Función para pausar o reanudar la música
+const toggleSound = () => {
+  if (isPlaying) {
+    backgroundMusic.pause();
+  } else {
+    backgroundMusic.play();
+  }
+  setIsPlaying(!isPlaying);
+};
 
   return (
     <NavigationContainer>
@@ -76,8 +83,9 @@ function Principal() {
             headerTintColor: 'white',
             headerRight: () => (
               <View style={{ flexDirection: 'row' }}>
-                <TouchableOpacity onPress={() => ('Sonido')} style={styles.iconButton}>
-                  <Image source={require('./assets/iconos/music.png')} style={styles.icon} />
+                <TouchableOpacity onPress={toggleSound} style={styles.iconButton}>
+                  <Image 
+                  source={isPlaying ? require('./assets/iconos/music.png'):require('./assets/iconos/musicoff.png')} style={styles.icon} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.iconButton}>
                   <Image source={require('./assets/iconos/icono1.png')} style={styles.icon} />
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
     marginVertical: 20, 
   },
   text: {
-    fontSize: 18,
+    fontSize: 15,
     color: '#333',
     marginTop: 15,
     textAlign: 'center',
@@ -146,6 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
+  fontFamily:'sans-serif',
     backgroundColor: 'white',
     padding: 30,
     borderRadius: 15,
