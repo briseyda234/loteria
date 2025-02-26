@@ -4,6 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Sound from 'react-native-sound';
 import Menu from './src/menu';
+import Idioma from './src/idioma';
+import Español from './src/dificultadE';
+import NivelFacilEsp from './src/facilE';
 import Dificultad from './src/dificultad';  // Asegúrate de tener la ruta correcta
 // Crear el stack de navegación
 const Stack = createStackNavigator();
@@ -32,7 +35,7 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
       <Image source={require('./assets/images/memorama1.png')} style={styles.image} />
 
       {/* Botón para iniciar juego y navegar a la segunda pantalla */}
-      <Button title="Iniciar juego" onPress={() => navigation.navigate('Menu')} color="#ff6347" />
+      <Button title="Iniciar juego" onPress={() => navigation.navigate('Idioma')} color="#ff6347" />
       
       {/* Modal con información de créditos */}
       <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
@@ -98,6 +101,9 @@ const toggleSound = () => {
         </Stack.Screen>
         <Stack.Screen name="Menu" component={Menu} options={{ headerTitle: '' }} />
         <Stack.Screen name="Dificultad" component={Dificultad} />
+        <Stack.Screen name="Idioma" component={Idioma} options={{ headerShown: false }} />
+        <Stack.Screen name="Español" component={Español} options={{ headerShown: false }} />
+        <Stack.Screen name="NivelFacilEsp" component={NivelFacilEsp} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
