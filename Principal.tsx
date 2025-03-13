@@ -9,9 +9,10 @@ import Español from './src/dificultadE';
 import NivelFacilEsp from './src/facilE';
 import Dificultad from './src/dificultad';  // Asegúrate de tener la ruta correcta
 // Crear el stack de navegación
+
 const Stack = createStackNavigator();
 //cargar audio previamente
-const backgroundMusic=new Sound(require('./assets/audio/audio.mp3'),Sound.MAIN_BUNDLE,(error)=>{
+const backgroundMusic=new Sound(require('./assets/audio/musica.mp3'),Sound.MAIN_BUNDLE,(error)=>{
   if(error){
     console.log('error al cargar el sonido',error);
     return;
@@ -43,10 +44,18 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
           <View style={styles.modalContent}>
             <Image source={require('./assets/images/img1.png')} style={styles.modalImage} />
             <Text style={styles.title}>Créditos</Text>
-            <Text style={styles.text}>Proyecto Dirigido: {"\n"}M.A.V. Martha P. Luna González</Text>
-            <Text style={styles.text}>Desarrollado por: {"\n"}Briseyda Silva Lopez{"\n"}Leydi Francisca Vazquez Camacho</Text>
-            <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación</Text>
-            <Text style={styles.text}>Versión: 1.0 </Text>
+            <Text style={styles.text}>Proyecto: "Memorama Zapoteca"</Text>
+          <Text style={styles.text}>M.A.V. Martha Patricia Luna González --Directora de proyecto--Diseño e ilustración</Text>
+          <Text style={styles.text}>M.C.C. Nieva García Omar Santiago -- Especialista externo</Text>
+          <Text style={styles.text}>Vásquez Camacho Leydi Francisca -- Desarrollo</Text>
+          <Text style={styles.text}>Silva López Briseyda -- Desarrollo</Text>
+          <Text style={styles.text}>Cruz Carrasco Martha Leticia -- Ilustración</Text>
+          <Text style={styles.text}>Hernández Gómez Leibniz -- Ilustración</Text>
+          <Text style={styles.text}>López Cirilo Kevin Alexis -- Ilustración</Text>
+          <Text style={styles.text}>Orlando Vinicio Trujillo Orozco -- Traducción al zapoteco</Text>
+          <Text style={styles.text}>Alquisiris Quecha Kelly -- Voz femenina en español-castellano</Text>
+          <Text style={styles.text}>Sánchez Vicente Jaqueline Guadalupe -- Voz femenina en zapoteco</Text>
+            <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación{"\n"}</Text>
             <Button title="Cerrar" onPress={() => setModalVisible(false)} color="#ff6347" />
           </View>
         </View>
@@ -139,7 +148,7 @@ const styles = StyleSheet.create({
     marginVertical: 20, 
   },
   text: {
-    fontSize: 15,
+    fontSize: 11,
     color: '#333',
     marginTop: 15,
     textAlign: 'center',

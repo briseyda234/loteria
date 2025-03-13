@@ -5,6 +5,7 @@ const Dificultad = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Selecciona la dificultad</Text>
+      
       <TouchableOpacity style={styles.button} onPress={() => {/* Lógica para empezar el juego */}}>
         <Text style={styles.buttonText}>Fácil</Text>
       </TouchableOpacity>
@@ -14,13 +15,19 @@ const Dificultad = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={() => {/* Lógica para empezar el juego */}}>
         <Text style={styles.buttonText}>Difícil</Text>
       </TouchableOpacity>
+
+      {/* Botón para regresar a la pantalla anterior */}
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.backButtonText}>←</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
+// Estilos
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1, // Asegura que el contenedor ocupa toda la pantalla
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
@@ -44,6 +51,19 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     textAlign: 'center',
+  },
+  backButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    padding: 12,
+    backgroundColor: '#ff6347',
+    borderRadius: 8,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
