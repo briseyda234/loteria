@@ -15,10 +15,10 @@ const Español = ({ navigation }) => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelFacilEsp')}>
           <Text style={styles.buttonText}>Fácil</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => {/* Lógica para empezar el juego */}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelMedioEsp')}>
           <Text style={styles.buttonText}>Medio</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => {/* Lógica para empezar el juego */}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelDificilEsp')}>
           <Text style={styles.buttonText}>Difícil</Text>
         </TouchableOpacity>
       </View>

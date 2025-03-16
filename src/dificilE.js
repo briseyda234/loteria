@@ -59,12 +59,13 @@ const getRandomPairs = (numPairs) => {
 };
 
 const Memorama = () => {
-  const [cards, setCards] = useState(getRandomPairs(5));
+  const [cards, setCards] = useState(getRandomPairs(15));
   const [flippedIndexes, setFlippedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
   const [gameWon, setGameWon] = useState(false);
-  const [time, setTime] = useState(300);
+  const [time, setTime] = useState(180);
   const [timerRunning, setTimerRunning] = useState(false);
+  const [attempts, setAttempts] = useState(20);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
@@ -84,16 +85,21 @@ const Memorama = () => {
       if (cards[firstIndex] === cards[secondIndex]) {
         setMatchedIndexes((prev) => [...prev, firstIndex, secondIndex]);
       }
+      setAttempts((prev) => prev - 1);
       setTimeout(() => setFlippedIndexes([]), 500);
     }
   }, [flippedIndexes]);
 
   useEffect(() => {
-    if (matchedIndexes.length === cards.length && cards.length > 0) {
+    if (matchedIndexes.length === cards.length) {
       setGameWon(true);
       setTimerRunning(false);
     }
-  }, [matchedIndexes, cards]);
+    if (attempts === 0) {
+      setGameOver(true);
+      setTimerRunning(false);
+    }
+  }, [matchedIndexes, attempts]);
 
   const handlePress = (index) => {
     if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index)) {
@@ -103,12 +109,13 @@ const Memorama = () => {
   };
 
   const restartGame = () => {
-    setCards(getRandomPairs(5));
+    setCards(getRandomPairs(15));
     setFlippedIndexes([]);
     setMatchedIndexes([]);
     setGameWon(false);
     setGameOver(false);
     setTime(300);
+    setAttempts(20);
     setTimerRunning(false);
   };
 
@@ -122,6 +129,7 @@ const Memorama = () => {
     <View style={styles.container}>
       <View style={styles.controls}>
         <Text style={styles.timer}>{formatTime(time)}</Text>
+        <Text style={styles.attempts}>🃏 Intentos: {attempts}</Text>
       </View>
 
       <View style={styles.grid}>
@@ -196,11 +204,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    marginTop: 20,
+    marginTop: 10,
   },
   card: {
-    width: 80,
-    height: 100,
+    width: 50,
+    height: 80,
     margin: 5,
   },
   image: {
