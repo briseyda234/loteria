@@ -1,9 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
 const Dificultad = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <TouchableOpacity 
+        style={styles.backButtonTop} 
+        onPress={() => navigation.navigate('Principal')}
+      >
+        <Text style={styles.backButtonText}>Volver</Text>
+      </TouchableOpacity>
+      
       <Text style={styles.title}>Selecciona la dificultad</Text>
       
       <TouchableOpacity style={styles.button} onPress={() => {/* Lógica para empezar el juego */}}>
@@ -15,11 +21,6 @@ const Dificultad = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={() => {/* Lógica para empezar el juego */}}>
         <Text style={styles.buttonText}>Difícil</Text>
       </TouchableOpacity>
-
-      {/* Botón para regresar a la pantalla anterior */}
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.backButtonText}>←</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -27,7 +28,7 @@ const Dificultad = ({ navigation }) => {
 // Estilos
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Asegura que el contenedor ocupa toda la pantalla
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
@@ -52,9 +53,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
   },
-  backButton: {
+  backButtonTop: {
     position: 'absolute',
-    bottom: 20,
+    top: 20,
     left: 20,
     padding: 12,
     backgroundColor: '#ff6347',

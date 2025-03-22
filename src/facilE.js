@@ -125,7 +125,7 @@ const Memorama = () => {
   
   return (
     <View style={styles.container}>
-
+      
       {/* 🕒 Controles superiores */}
       <View style={styles.controls}>
         <TouchableOpacity 
