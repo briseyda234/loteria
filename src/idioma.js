@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, Dimensions, Image } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 const Idioma = ({ navigation }) => {
@@ -9,6 +9,11 @@ const Idioma = ({ navigation }) => {
       style={styles.background}
     >
       <View style={styles.container}>
+        {/* Botón de regreso con icono */}
+        <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Idioma')}>
+          <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
+        </TouchableOpacity>
+
         <Text style={styles.title}>Selecciona el idioma:</Text>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Español')}>
           <Text style={styles.buttonText}>Español</Text>
@@ -63,6 +68,25 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.88)',
     textAlign: 'center',
     fontSize: 20,
+  },
+  back: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+  backText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  backIcon: {
+    width: 40, // Ajusta el tamaño del icono
+    height: 40,
+    tintColor: '#fff', // Ajusta el color si es necesario
   },
 });
 
