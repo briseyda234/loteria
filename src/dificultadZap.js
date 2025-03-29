@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ImageBackground,Image} from '
 
 const Zapoteco = ({ navigation }) => {
   return (
-    <ImageBackground source={require('./fondo/lienzo.jpg')} style={styles.background}>
+    <ImageBackground source={require('./fondo/fondo1.jpg')} style={styles.background}>
       <View style={styles.container}>
         {/* Botón de regreso con icono */}
         <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home')}>
@@ -37,28 +37,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    //backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   title: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
     color: '#fff',
+    backgroundColor:'rgba(0, 0, 0, 0.88)',
   },
   button: {
     padding: 10,
     borderColor: '#fff',
     borderRadius: 10,
     marginVertical: 10,
-    width: '80%',
-    backgroundColor: '#6200ee',
+    width: '60%',
+    backgroundColor: 'rgb(255, 251, 251)',
     borderRightWidth: 2,
     borderLeftWidth: 2,
-    borderBottomWidth: 4,
+    borderBottomWidth: 2,
   },
   buttonText: {
-    color: '#fff',
+    fontFamily:'sans-serif-light',
+    fontWeight: 'bold',
+    color: 'rgba(0, 0, 0, 0.88)',
     textAlign: 'center',
     fontSize: 20,
   },
