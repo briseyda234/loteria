@@ -120,6 +120,8 @@ const Memorama = () => {
 
   return (
     <View style={styles.container}>
+
+      {/* 🕒 Controles superiores */}
       <View style={styles.controls}>
         <Text style={styles.timer}>{formatTime(time)}</Text>
       </View>

@@ -1,10 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-
 const Dificultad = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <TouchableOpacity 
+        style={styles.backButtonTop} 
+        onPress={() => navigation.navigate('Principal')}
+      >
+        <Text style={styles.backButtonText}>Volver</Text>
+      </TouchableOpacity>
+      
       <Text style={styles.title}>Selecciona la dificultad</Text>
+      
       <TouchableOpacity style={styles.button} onPress={() => {/* Lógica para empezar el juego */}}>
         <Text style={styles.buttonText}>Fácil</Text>
       </TouchableOpacity>
@@ -18,6 +25,7 @@ const Dificultad = ({ navigation }) => {
   );
 };
 
+// Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -44,6 +52,19 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     textAlign: 'center',
+  },
+  backButtonTop: {
+    position: 'absolute',
+    top: 20,
+    left: 20,
+    padding: 12,
+    backgroundColor: '#ff6347',
+    borderRadius: 8,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 

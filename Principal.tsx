@@ -12,16 +12,45 @@ import NivelDificilEsp from './src/dificilE';
 import Dificultad from './src/dificultad';  // Asegúrate de tener la ruta correcta
 // Crear el stack de navegación
 const Stack = createStackNavigator();
-//cargar audio previamente
-const backgroundMusic=new Sound(require('./assets/audio/audio.mp3'),Sound.MAIN_BUNDLE,(error)=>{
-  if(error){
-    console.log('error al cargar el sonido',error);
-    return;
+const Principal = () => {
+ // const [backgroundMusic, setBackgroundMusic] = useState(null);
+ const [backgroundMusic, setBackgroundMusic] = useState<Sound | null>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [icon, setIcon] = useState(require('./assets/iconos/music.png')); // Icono inicial
+
+  useEffect(() => {
+    // Cargar el sonido al iniciar la app
+    const music = new Sound(require('./assets/audio/musica1.mp3'), (error) => {
+
+      if (error) {
+        console.log('Error al cargar la música:', error);
+        return;
+      }
+      music.setNumberOfLoops(-1); // -1 para repetir infinito
+      music.play(); // Inicia la música automáticamente
+      setBackgroundMusic(music);
+    });
+
+    return () => {
+      // Limpiar el sonido al cerrar la app
+      if (music) {
+        music.release();
+      }
+    };
+  }, []);
+
+const toggleSound = () => {
+  if (backgroundMusic) {
+    if (isPlaying) {
+      backgroundMusic.pause();
+      setIcon(require('./assets/iconos/musicoff.png')); // Cambia el icono a "mute"
+    } else {
+      backgroundMusic.play();
+      setIcon(require('./assets/iconos/music.png')); // Cambia el icono a "play"
+    }
+    setIsPlaying(!isPlaying);
   }
-  backgroundMusic.setNumberOfLoops(-1);
-});
-
-
+};
 
 // Pantalla de inicio (HomeScreen)
 function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisible: boolean; setModalVisible: (visible: boolean) => void; navigation: any}) {
@@ -45,10 +74,18 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
           <View style={styles.modalContent}>
             <Image source={require('./assets/images/img1.png')} style={styles.modalImage} />
             <Text style={styles.title}>Créditos</Text>
-            <Text style={styles.text}>Proyecto Dirigido: {"\n"}M.A.V. Martha P. Luna González</Text>
-            <Text style={styles.text}>Desarrollado por: {"\n"}Briseyda Silva Lopez{"\n"}Leydi Francisca Vazquez Camacho</Text>
-            <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación</Text>
-            <Text style={styles.text}>Versión: 1.0 </Text>
+            <Text style={styles.text}>Proyecto: "Memorama Zapoteca"</Text>
+          <Text style={styles.text}>M.A.V. Martha Patricia Luna González --Directora de proyecto--Diseño e ilustración</Text>
+          <Text style={styles.text}>M.C.C. Nieva García Omar Santiago -- Especialista externo</Text>
+          <Text style={styles.text}>Vásquez Camacho Leydi Francisca -- Desarrollo</Text>
+          <Text style={styles.text}>Silva López Briseyda -- Desarrollo</Text>
+          <Text style={styles.text}>Cruz Carrasco Martha Leticia -- Ilustración</Text>
+          <Text style={styles.text}>Hernández Gómez Leibniz -- Ilustración</Text>
+          <Text style={styles.text}>López Cirilo Kevin Alexis -- Ilustración</Text>
+          <Text style={styles.text}>Orlando Vinicio Trujillo Orozco -- Traducción al zapoteco</Text>
+          <Text style={styles.text}>Alquisiris Quecha Kelly -- Voz femenina en español-castellano</Text>
+          <Text style={styles.text}>Sánchez Vicente Jaqueline Guadalupe -- Voz femenina en zapoteco</Text>
+            <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación{"\n"}</Text>
             <Button title="Cerrar" onPress={() => setModalVisible(false)} color="#ff6347" />
           </View>
         </View>
@@ -59,24 +96,9 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
 
 
 // Componente principal de la app
-function Principal() {
+
   const [modalVisible, setModalVisible] = useState(false);
-  const[isPlaying,setIsPlaying]=useState(true);
-//funcion para reproducir /pausar la musica
-
-
-
-
-// Función para pausar o reanudar la música
-const toggleSound = () => {
-  if (isPlaying) {
-    backgroundMusic.pause();
-  } else {
-    backgroundMusic.play();
-  }
-  setIsPlaying(!isPlaying);
-};
-
+  //const[isPlaying,setIsPlaying]=useState(true);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="HomeScreen">
@@ -90,7 +112,7 @@ const toggleSound = () => {
               <View style={{ flexDirection: 'row' }}>
                 <TouchableOpacity onPress={toggleSound} style={styles.iconButton}>
                   <Image 
-                  source={isPlaying ? require('./assets/iconos/music.png'):require('./assets/iconos/musicoff.png')} style={styles.icon} />
+                  source={icon} style={styles.icon} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.iconButton}>
                   <Image source={require('./assets/iconos/icono1.png')} style={styles.icon} />
@@ -111,7 +133,7 @@ const toggleSound = () => {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
+};
 
 
 // Estilos
@@ -143,7 +165,7 @@ const styles = StyleSheet.create({
     marginVertical: 20, 
   },
   text: {
-    fontSize: 15,
+    fontSize: 11,
     color: '#333',
     marginTop: 15,
     textAlign: 'center',
@@ -164,7 +186,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
-  fontFamily:'sans-serif',
+  fontFamily:'sans-serif-light',
+   fontWeight:'normal',
     backgroundColor: 'white',
     padding: 30,
     borderRadius: 15,
@@ -172,8 +195,8 @@ const styles = StyleSheet.create({
     width: '85%',
   },
   modalImage: {
-    width: 120, 
-    height: 120, 
+    width: 100, 
+    height: 100, 
     marginBottom: 10,
   },
 });
