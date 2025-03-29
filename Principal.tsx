@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, SafeAreaView, Text, Button, StyleSheet, Image, View, TouchableOpacity } from 'react-native';
+import { Modal, SafeAreaView, Text, Button, StyleSheet, Image, View, TouchableOpacity,ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Sound from 'react-native-sound';
@@ -27,6 +27,7 @@ const Principal = () => {
         console.log('Error al cargar la música:', error);
         return;
       }
+        music.setVolume(0.2); // Reducir el volumen al 30%
       music.setNumberOfLoops(-1); // -1 para repetir infinito
       music.play(); // Inicia la música automáticamente
       setBackgroundMusic(music);
@@ -57,17 +58,27 @@ const toggleSound = () => {
 function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisible: boolean; setModalVisible: (visible: boolean) => void; navigation: any}) {
   return (
     <SafeAreaView style={styles.container}>
-      {/* Contenedor del título */}
+   
+      {/* Sección superior con imagen */}
+      <ImageBackground 
+        source={require('./src/fondo/flor_fondo_negro1.jpg')} // Reemplaza con tu imagen
+        style={styles.imageContainer}
+         resizeMode="cover"
+      >
+      
+      </ImageBackground>
+
+      {/* Sección inferior con color sólido */}
+      <View style={styles.colorContainer}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>MEMORAMA</Text>
-        <Text style={styles.title}>ZAPOTECA</Text>
+          <Text style={styles.title}>MEMORAMA</Text>
+          <Text style={styles.title}>ZAPOTECA</Text>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Idioma')}>
+    <Text style={styles.buttonText}>Iniciar Juego</Text>
+  </TouchableOpacity>
       </View>
 
-      {/* Imagen en el centro */}
-      <Image source={require('./assets/images/memorama1.png')} style={styles.image} />
-
-      {/* Botón para iniciar juego y navegar a la segunda pantalla */}
-      <Button title="Iniciar juego" onPress={() => navigation.navigate('Idioma')} color="#ff6347" />
       
       {/* Modal con información de créditos */}
       <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
@@ -106,8 +117,9 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
         <Stack.Screen 
           name="HomeScreen"
           options={{
+            headerTransparent: true, // Hace que el header sea transparente
             headerTitle: '',
-            headerStyle: { backgroundColor: '#6200ea' },
+           // headerStyle: { backgroundColor: '#6200ea' },
             headerTintColor: 'white',
             headerRight: () => (
               <View style={{ flexDirection: 'row' }}>
@@ -143,10 +155,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center', 
     alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#E7E1F2',
+    
+  },
+  imageContainer: {
+    flex: 1, // Ocupa la mitad superior
+    justifyContent: 'flex-start', // Alinea la imagen hacia arriba
+    width: '100%',
+    height:'109%',
+    paddingTop: 35, // Ajusta el desplazamiento hacia arriba
+  },
+  colorContainer: {
+    flex: 1, // Ocupa la mitad inferior
+    backgroundColor: 'red', // Color sólido
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   titleContainer: {
+    color:'white',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -156,7 +182,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#6200ea',
+    color: '#fefefe',
     textAlign: 'center',
     marginBottom: 10,
   },
@@ -184,7 +210,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    //backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContent: {
   fontFamily:'sans-serif-light',
@@ -199,6 +225,24 @@ const styles = StyleSheet.create({
     width: 100, 
     height: 100, 
     marginBottom: 10,
+  },
+  button: {
+    padding: 10,
+    borderColor: '#fff',
+    borderRadius: 10,
+    marginVertical: 10,
+    width: '60%',
+    backgroundColor: 'rgb(255, 251, 251)',
+    borderRightWidth: 2,
+    borderLeftWidth: 2,
+    borderBottomWidth: 2,
+  },
+  buttonText: {
+    fontFamily:'sans-serif-light',
+    fontWeight: 'bold',
+    color: 'rgba(0, 0, 0, 0.88)',
+    textAlign: 'center',
+    fontSize: 20,
   },
 });
 
