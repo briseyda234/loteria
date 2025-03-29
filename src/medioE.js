@@ -122,14 +122,21 @@ const Memorama = () => {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    return (
+      <View style={styles.container}>
+        <Text style={styles.timerText}>
+          Tiempo restante:{"\n"}
+          {minutes}:{remainingSeconds < 10 ? '0' : ''}{remainingSeconds}
+        </Text>
+      </View>
+    );
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.controls}>
         <Text style={styles.timer}>{formatTime(time)}</Text>
-        <Text style={styles.attempts}>🃏 Intentos: {attempts}</Text>
+        <Text style={styles.attempts}>Intentos restantes:{'\n'}{attempts}</Text>
       </View>
 
       <View style={styles.grid}>
@@ -169,7 +176,6 @@ const Memorama = () => {
   );
 };
 
-// 🎨 Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -185,10 +191,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 20,
   },
-  timer: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
+  attempts: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center", 
+    color: "#333",
   },
   button: {
     backgroundColor: '#fff',
@@ -205,6 +212,12 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     marginTop: 10,
+  },
+  timerText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center", 
+    color: "#333",
   },
   card: {
     width: 70,

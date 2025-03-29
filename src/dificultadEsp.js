@@ -6,7 +6,7 @@ const Español = ({ navigation }) => {
     <ImageBackground source={require('./fondo/fondo1.jpg')} style={styles.background}>
       <View style={styles.container}>
         {/* Botón de regreso con icono */}
-        <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Idioma')}>
           <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
         </TouchableOpacity>
 

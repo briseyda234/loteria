@@ -27,7 +27,7 @@ const Principal = () => {
         console.log('Error al cargar la música:', error);
         return;
       }
-        music.setVolume(0.2); // Reducir el volumen al 30%
+        music.setVolume(0.1); // Reducir el volumen al 30%
       music.setNumberOfLoops(-1); // -1 para repetir infinito
       music.play(); // Inicia la música automáticamente
       setBackgroundMusic(music);
@@ -61,7 +61,7 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
    
       {/* Sección superior con imagen */}
       <ImageBackground 
-        source={require('./src/fondo/flor_fondo_negro1.jpg')} // Reemplaza con tu imagen
+        source={require('./src/fondo/flor_fondo_negro33.png')} // Reemplaza con tu imagen
         style={styles.imageContainer}
          resizeMode="cover"
       >
@@ -85,7 +85,7 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Image source={require('./assets/images/img1.png')} style={styles.modalImage} />
-            <Text style={styles.title}>Créditos</Text>
+            <Text style={styles.title1}>Créditos</Text>
             <Text style={styles.text}>Proyecto: "Memorama Zapoteca"</Text>
           <Text style={styles.text}>M.A.V. Martha Patricia Luna González --Directora de proyecto--Diseño e ilustración</Text>
           <Text style={styles.text}>M.C.C. Nieva García Omar Santiago -- Especialista externo</Text>
@@ -183,6 +183,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     color: '#fefefe',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  title1: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: 'black',
     textAlign: 'center',
     marginBottom: 10,
   },

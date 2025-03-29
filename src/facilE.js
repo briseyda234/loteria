@@ -156,7 +156,7 @@ const Memorama = ({ navigation }) => {
               <TouchableOpacity style={styles.button} onPress={restartGame}>
                 <Text style={styles.buttonText}>JUGAR DE NUEVO</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Español')}>
+              <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
                 <Text style={styles.buttonText}>REGRESAR</Text>
               </TouchableOpacity>
             </View>
