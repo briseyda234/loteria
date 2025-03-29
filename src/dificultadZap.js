@@ -1,24 +1,25 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ImageBackground,Image} from 'react-native';
 
-const Idioma = ({ navigation }) => {
+const Zapoteco = ({ navigation }) => {
   return (
-    <ImageBackground 
-      source={require('./fondo/lienzo.jpg')} 
-      style={styles.background}
-    >
+    <ImageBackground source={require('./fondo/lienzo.jpg')} style={styles.background}>
       <View style={styles.container}>
         {/* Botón de regreso con icono */}
-          <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home')}>
-            <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
-          </TouchableOpacity>
-        
-        <Text style={styles.title}>Selecciona el idioma:</Text>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Español')}>
-          <Text style={styles.buttonText}>Español</Text>
+        <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home')}>
+          <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Zapoteco')}>
-          <Text style={styles.buttonText}>Zapoteco</Text>
+
+        <Text style={styles.title}>Selecciona la dificultad:</Text>
+        
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelFacilZap')}>
+          <Text style={styles.buttonText}>Fácil</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelMedioZap')}>
+          <Text style={styles.buttonText}>Medio</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelDificilZap')}>
+          <Text style={styles.buttonText}>Difícil</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -36,14 +37,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   title: {
     fontSize: 30,
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
-    color: '#fff', 
+    color: '#fff',
   },
   button: {
     padding: 10,
@@ -82,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Idioma;
+export default Zapoteco;

@@ -5,11 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Sound from 'react-native-sound';
 import Menu from './src/menu';
 import Idioma from './src/idioma';
-import Español from './src/dificultadE';
+import DificultadEsp from './src/dificultadEsp';
+import DificultadZap from './src/dificultadZap'; 
 import NivelFacilEsp from './src/facilE';
 import NivelMedioEsp from './src/medioE';
 import NivelDificilEsp from './src/dificilE';
-import Dificultad from './src/dificultad';  // Asegúrate de tener la ruta correcta
+
 // Crear el stack de navegación
 const Stack = createStackNavigator();
 const Principal = () => {
@@ -124,9 +125,9 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
           {(props) => <HomeScreen {...props} modalVisible={modalVisible} setModalVisible={setModalVisible} />}
         </Stack.Screen>
         <Stack.Screen name="Menu" component={Menu} options={{ headerTitle: '' }} />
-        <Stack.Screen name="Dificultad" component={Dificultad} />
         <Stack.Screen name="Idioma" component={Idioma} options={{ headerShown: false }} />
-        <Stack.Screen name="Español" component={Español} options={{ headerShown: false }} />
+        <Stack.Screen name="Español" component={DificultadEsp} options={{ headerShown: false }} />
+        <Stack.Screen name="Zapoteco" component={DificultadZap} options={{ headerShown: false }} />
         <Stack.Screen name="NivelFacilEsp" component={NivelFacilEsp} options={{ headerShown: false }} />
         <Stack.Screen name="NivelMedioEsp" component={NivelMedioEsp} options={{ headerShown: false }} />
         <Stack.Screen name="NivelDificilEsp" component={NivelDificilEsp} options={{ headerShown: false }} />
