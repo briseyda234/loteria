@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet,ImageBackground,Image } from 'react-native';
 const Dificultad = ({ navigation }) => {
   return (
+    
     <View style={styles.container}>
       <TouchableOpacity 
         style={styles.backButtonTop} 
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderRadius: 8,
     marginVertical: 8,
-    width: '80%',
+    width: '60%',
     backgroundColor: '#6200ee',
   },
   buttonText: {
