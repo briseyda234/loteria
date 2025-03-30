@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     width: width, // Usa el ancho de la pantalla
-    height: height, // Usa la altura de la pantalla
-   
+    height: height, // Usa la altura de la pantalla 
     resizeMode: 'cover',
    justifyContent: 'center',
   },

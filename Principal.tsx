@@ -10,7 +10,8 @@ import DificultadZap from './src/dificultadZap';
 import NivelFacilEsp from './src/facilE';
 import NivelMedioEsp from './src/medioE';
 import NivelDificilEsp from './src/dificilE';
-
+import { Dimensions, ScrollView} from 'react-native';
+const { width, height } = Dimensions.get('window');
 // Crear el stack de navegación
 const Stack = createStackNavigator();
 const Principal = () => {
@@ -27,7 +28,7 @@ const Principal = () => {
         console.log('Error al cargar la música:', error);
         return;
       }
-        music.setVolume(0.1); // Reducir el volumen al 30%
+        music.setVolume(0.2); // Reducir el volumen al 30%
       music.setNumberOfLoops(-1); // -1 para repetir infinito
       music.play(); // Inicia la música automáticamente
       setBackgroundMusic(music);
@@ -83,23 +84,29 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
       {/* Modal con información de créditos */}
       <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalContainer}>
+        
           <View style={styles.modalContent}>
-            <Image source={require('./assets/images/img1.png')} style={styles.modalImage} />
+          <ScrollView style={styles.scrollView}>
+            <Image source={require('./assets/images/logo.jpg')} style={styles.modalImage} />
             <Text style={styles.title1}>Créditos</Text>
-            <Text style={styles.text}>Proyecto: "Memorama Zapoteca"</Text>
-          <Text style={styles.text}>M.A.V. Martha Patricia Luna González --Directora de proyecto--Diseño e ilustración</Text>
-          <Text style={styles.text}>M.C.C. Nieva García Omar Santiago -- Especialista externo</Text>
-          <Text style={styles.text}>Vásquez Camacho Leydi Francisca -- Desarrollo</Text>
-          <Text style={styles.text}>Silva López Briseyda -- Desarrollo</Text>
-          <Text style={styles.text}>Cruz Carrasco Martha Leticia -- Ilustración</Text>
-          <Text style={styles.text}>Hernández Gómez Leibniz -- Ilustración</Text>
-          <Text style={styles.text}>López Cirilo Kevin Alexis -- Ilustración</Text>
-          <Text style={styles.text}>Orlando Vinicio Trujillo Orozco -- Traducción al zapoteco</Text>
-          <Text style={styles.text}>Alquisiris Quecha Kelly -- Voz femenina en español-castellano</Text>
-          <Text style={styles.text}>Sánchez Vicente Jaqueline Guadalupe -- Voz femenina en zapoteco</Text>
+            <Text style={styles.text}>Proyecto: {"\n"}"Memorama Zapoteca"</Text>
+          <Text style={styles.text}>Directora de proyecto--Diseño e ilustración{"\n"}M.A.V. Martha Patricia Luna González</Text>
+          <Text style={styles.text}>Especialista externo{"\n"}M.C.C. Nieva García Omar Santiago</Text>
+          <Text style={styles.text}>Desarrollo{"\n"}Vásquez Camacho Leydi Francisca</Text>
+          <Text style={styles.text}>Desarrollo{"\n"}Silva López Briseyda</Text>
+          <Text style={styles.text}>Ilustración{"\n"}Cruz Carrasco Martha Leticia</Text>
+          <Text style={styles.text}>Ilustración{"\n"}Hernández Gómez Leibniz</Text>
+          <Text style={styles.text}>Ilustración{"\n"}López Cirilo Kevin Alexis</Text>
+          <Text style={styles.text}>Traducción al zapoteco{"\n"}Orlando Vinicio Trujillo Orozco</Text>
+          <Text style={styles.text}>Voz femenina en español-castellano{"\n"}Alquisiris Quecha Kelly</Text>
+          <Text style={styles.text}>Voz femenina en zapoteco{"\n"}Sánchez Vicente Jaqueline Guadalupe </Text>
             <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación{"\n"}</Text>
-            <Button title="Cerrar" onPress={() => setModalVisible(false)} color="#ff6347" />
+            <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
+  <Text style={styles.closeButtonText}>Cerrar</Text>
+</TouchableOpacity>
+            </ScrollView>
           </View>
+          
         </View>
       </Modal>
     </SafeAreaView>
@@ -161,7 +168,6 @@ const styles = StyleSheet.create({
     flex: 1, // Ocupa la mitad superior
     justifyContent: 'flex-start', // Alinea la imagen hacia arriba
     width: '100%',
-    height:'109%',
     paddingTop: 35, // Ajusta el desplazamiento hacia arriba
   },
   colorContainer: {
@@ -169,7 +175,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'red', // Color sólido
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+   
+    width: width, // Usa el ancho de la pantalla
+    height: height, // Usa la altura de la pantalla 
   },
   titleContainer: {
     color:'white',
@@ -177,19 +185,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: 50,
+    top: 20,
+    fontFamily:'Roboto',
+    fontWeight: 'bold',
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
     color: '#fefefe',
-    textAlign: 'center',
-    marginBottom: 10,
+    textAlign: 'center',  
+    marginBottom:1,
+    fontFamily:'sans-serif-light',
+    fontWeight: 'bold',
   },
   title1: {
     fontSize: 28,
+    fontFamily:'sans-serif-light',
     fontWeight: 'bold',
-    color: 'black',
+    color: 'white',
     textAlign: 'center',
     marginBottom: 10,
   },
@@ -199,11 +211,14 @@ const styles = StyleSheet.create({
     marginVertical: 20, 
   },
   text: {
-    fontSize: 11,
-    color: '#333',
+    fontSize: 13,
+    color: 'white',
     marginTop: 15,
     textAlign: 'center',
+    fontFamily:'sans-serif-light',
+    fontWeight: 'bold',
   },
+
   iconButton: {
     marginRight: 15,
     padding: 5,
@@ -217,21 +232,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    //backgroundColor: 'rgba(0, 0, 0, 0.5)',
+   // backgroundColor: 'rgba(166, 5, 5, 0.5)',
   },
   modalContent: {
-  fontFamily:'sans-serif-light',
-   fontWeight:'normal',
-    backgroundColor: 'white',
-    padding: 30,
+    fontFamily:'sans-serif-light',
+    fontWeight: 'bold',
+   color: 'white',
+  backgroundColor: 'rgb(29, 29, 29)',
+   // padding: 30,   
     borderRadius: 15,
     alignItems: 'center',
-    width: '85%',
+    width: width * 0.85, // 85% del ancho de la pantalla
+    maxHeight: height * 0.8, // 80% de la altura de la pantalla
+  },
+  scrollView:{
+width:'100%',
   },
   modalImage: {
+    top:10,
     width: 100, 
     height: 100, 
     marginBottom: 10,
+    alignItems:'center',
+    alignSelf: 'center'
   },
   button: {
     padding: 10,
@@ -250,6 +273,31 @@ const styles = StyleSheet.create({
     color: 'rgba(0, 0, 0, 0.88)',
     textAlign: 'center',
     fontSize: 20,
+  },
+  closeButton:{
+    backgroundColor: 'rgb(255, 251, 251)', // Rojo vibrante
+    padding: 10,
+    borderColor: '#fff',
+    marginVertical: 10,
+    borderRadius: 10,
+    alignSelf: 'center', // Centrar el botón dentro del modal
+    borderRightWidth: 2,
+    borderLeftWidth: 4,
+    borderBottomWidth: 2,
+    width:'60%'
+  },
+  closeButtonText: {
+    fontFamily:'sans-serif-light',
+    fontWeight: 'bold',
+    color: 'rgba(0, 0, 0, 0.88)',
+    textAlign: 'center',
+    fontSize: 20,
+  },
+  modalBackground: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center', 
+    alignItems: 'center', 
   },
 });
 
