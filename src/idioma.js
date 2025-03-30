@@ -13,12 +13,12 @@ const Idioma = ({ navigation }) => {
         <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Menu')}>
           <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
         </TouchableOpacity>
-        <Text style={styles.title}>Selecciona el idioma:</Text>
+        <Text style={styles.title}>Selecciona el idioma</Text>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Español')}>
-          <Text style={styles.buttonText}>Español</Text>
+          <Text style={styles.buttonText}>ESPAÑOL</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Zapoteco')}>
-          <Text style={styles.buttonText}>Zapoteco</Text>
+          <Text style={styles.buttonText}>ZAPOTECO</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
