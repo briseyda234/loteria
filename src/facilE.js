@@ -115,22 +115,14 @@ const Memorama = ({ navigation }) => {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return (
-      <View style={styles.container}>
-        <Text style={styles.timerText}>
-          Tiempo restante:{"\n"}
-          {minutes}:{remainingSeconds < 10 ? '0' : ''}{remainingSeconds}
-        </Text>
-      </View>
-    );
-  };
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  }; 
 
   return (
     <View style={styles.container}>
 
-      {/* 🕒 Controles superiores */}
       <View style={styles.controls}>
-        <Text style={styles.timer}>{formatTime(time)}</Text>
+        <Text style={styles.timerText}>TIEMPO RESTANTE{'\n'}{formatTime(time)}</Text>
       </View>
 
       <View style={styles.grid}>

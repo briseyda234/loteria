@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Image, StyleSheet, Modal, Text, Button } from 'react-native';
+import { View, TouchableOpacity, Image, StyleSheet, Modal, Text, Button, ImageBackground } from 'react-native';
 
 const allImages = [
   require('./images/imagesEsp/1_Armadillo.jpg'),
@@ -58,7 +58,7 @@ const getRandomPairs = (numPairs) => {
   return [...selected, ...selected].sort(() => Math.random() - 0.5);
 };
 
-const Memorama = () => {
+const Memorama = ({ navigation }) => {
   const [cards, setCards] = useState(getRandomPairs(15));
   const [flippedIndexes, setFlippedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
@@ -120,17 +120,17 @@ const Memorama = () => {
   };
 
   const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-  };
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.controls}>
-        <Text style={styles.timer}>{formatTime(time)}</Text>
-        <Text style={styles.attempts}>🃏 Intentos: {attempts}</Text>
-      </View>
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    };  
+  
+    return (
+      <View style={styles.container}>
+        <View style={styles.controls}>
+          <Text style={styles.timerText}>TIEMPO RESTANTE{'\n'}{formatTime(time)}</Text>
+          <Text style={styles.attempts}>INTENTOS RESTANTES{'\n'}{attempts}</Text>
+        </View>
 
       <View style={styles.grid}>
         {cards.map((card, index) => (
@@ -149,19 +149,26 @@ const Memorama = () => {
       </View>
 
       <Modal visible={gameWon} transparent={true} animationType="slide">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalText}>🎉 ¡Felicidades! Has ganado 🎉</Text>
-            <Button title="Jugar de nuevo" onPress={restartGame} />
-          </View>
-        </View>
+        <ImageBackground source={require("./fondo/fondo.jpg")} style={styles.modalBackground} imageStyle={{opacity: 0.8}}>
+          <Text style={styles.modalText}>¡Felicidades!{"\n"}Has ganado</Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={styles.button} onPress={restartGame}>
+                <Text style={styles.buttonText}>JUGAR DE NUEVO</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+                <Text style={styles.buttonText}>REGRESAR</Text>
+              </TouchableOpacity>
+            </View>
+        </ImageBackground>
       </Modal>
-
+      
       <Modal visible={gameOver} transparent={true} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>⏳ ¡Tiempo agotado!</Text>
-            <Button title="Intentar de nuevo" onPress={restartGame} />
+            <Text style={styles.modalText2}>¡Tiempo agotado!</Text>
+              <TouchableOpacity style={styles.button2} onPress={restartGame}>
+                <Text style={styles.buttonText}>INTENTAR DE NUEVO</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -169,7 +176,6 @@ const Memorama = () => {
   );
 };
 
-// 🎨 Estilos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -178,27 +184,47 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   controls: {
-    flexDirection: 'row',
-    justifyContent: 'center', 
-    alignItems: 'center',
-    width: '100%',
-    paddingVertical: 10,
-    marginTop: 20,
+    flexDirection: "row", 
+    justifyContent: "space-between", 
+    width: "100%",
+    paddingHorizontal: 10, 
   },
-  timer: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
+  attempts: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center", 
+    color: "#333",
   },
   button: {
-    backgroundColor: '#fff',
-    padding: 10,
+    borderColor: '#fff',
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#ccc',
+    marginVertical: 10,
+    width: '40%',
+    height: '40%',
+    backgroundColor: '#6200ee',
+    borderRightWidth: 2,
+    borderLeftWidth: 2,
+    borderBottomWidth: 4,
+    alignItems: "center", 
+    justifyContent: "center", 
+  },
+  button2: {
+    borderColor: '#000',
+    borderRadius: 10,
+    marginVertical: 10,
+    width: '50%',
+    backgroundColor: 'red',
+    borderRightWidth: 2,
+    borderLeftWidth: 2,
+    borderBottomWidth: 4,
+    justifyContent: "center", 
+    padding: 10,
   },
   buttonText: {
+    color: '#fff',
+    textAlign: 'center',
     fontSize: 18,
+    fontWeight: 'bold',
   },
   grid: {
     flexDirection: 'row',
@@ -206,9 +232,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
   },
+  timerText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    textAlign: "center", 
+    color: "#333",
+  },
   card: {
-    width: 70,
-    height: 100,
+    width: 50,
+    height: 70,
     margin: 5,
   },
   image: {
@@ -220,7 +252,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(255, 0, 0, 0.5)',
   },
   modalContent: {
     backgroundColor: '#fff',
@@ -228,10 +260,32 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
   },
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   modalText: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 10,
+    color: 'white',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalText2: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonContainer: {
+    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    gap: 25,
   },
 });
 
