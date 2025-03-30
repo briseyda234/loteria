@@ -2,54 +2,54 @@ import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Image, StyleSheet, Modal, Text, Button, ImageBackground } from 'react-native';
 
 const allImages = [
-  require('./images/imagesEsp/1_Armadillo.jpg'),
-  require('./images/imagesEsp/3_Mosquito.jpg'),
-  require('./images/imagesEsp/5_Alacran.jpg'),
-  require('./images/imagesEsp/7_Corazon.jpg'),
-  require('./images/imagesEsp/8_Muerte.jpg'),
-  require('./images/imagesEsp/9_Perro.jpg'),
-  require('./images/imagesEsp/11_Hamaca.jpg'),
-  require('./images/imagesEsp/12_Sol.jpg'),
-  require('./images/imagesEsp/14_Totopo.jpg'),
-  require('./images/imagesEsp/15_Horno.jpg'),
-  require('./images/imagesEsp/16_Muxe.jpg'),
-  require('./images/imagesEsp/17_Dama.jpg'),
-  require('./images/imagesEsp/18_Jicalpextle.jpg'),
-  require('./images/imagesEsp/19_Huarache.jpg'),
-  require('./images/imagesEsp/20_Estrella.jpg'),
-  require('./images/imagesEsp/21_Tortuga.jpg'),
-  require('./images/imagesEsp/22_Tlacuache.jpg'),
-  require('./images/imagesEsp/23_Tarantula.jpg'),
-  require('./images/imagesEsp/24_Borracho.jpg'),
-  require('./images/imagesEsp/25_Nopal.jpg'),
-  require('./images/imagesEsp/26_Muneca.jpg'),
-  require('./images/imagesEsp/27_Luna.jpg'),
-  require('./images/imagesEsp/28_Zanate.jpg'),
-  require('./images/imagesEsp/29_Enagua.jpg'),
-  require('./images/imagesEsp/30_Mezcal.jpg'),
-  require('./images/imagesEsp/32_Joya.jpg'),
-  require('./images/imagesEsp/33_Mayordomo.jpg'),
-  require('./images/imagesEsp/34_Bandera.jpg'),
-  require('./images/imagesEsp/35_Pescador.jpg'),
-  require('./images/imagesEsp/36_Mojarra.jpg'),
-  require('./images/imagesEsp/37_Rana.jpg'),
-  require('./images/imagesEsp/38_Diablito.jpg'),
-  require('./images/imagesEsp/39_Soldado.jpg'),
-  require('./images/imagesEsp/40_Iguana.jpg'),
-  require('./images/imagesEsp/41_Camaron.jpg'),
-  require('./images/imagesEsp/42_Jazmin.jpg'),
-  require('./images/imagesEsp/43_SonDelPescado.jpg'),
-  require('./images/imagesEsp/44_Casa.jpg'),
-  require('./images/imagesEsp/45_Xhuana.jpg'),
-  require('./images/imagesEsp/46_Mango.jpg'),
-  require('./images/imagesEsp/47_Marena.jpg'),
-  require('./images/imagesEsp/48_Huipil.jpg'),
-  require('./images/imagesEsp/49_Catre.jpg'),
-  require('./images/imagesEsp/50_FlorDeMayo.jpg'),
-  require('./images/imagesEsp/51_Serpiente.jpg'),
-  require('./images/imagesEsp/52_Tlayuda.jpg'),
-  require('./images/imagesEsp/53_Sirena.jpg'),
-  require('./images/imagesEsp/54_Gallo.jpg'),
+  require('./images/imagesZap/1_Ngupi.jpg'),
+  require('./images/imagesZap/3_Biux.jpg'),
+  require('./images/imagesZap/5_Miaxubi.jpg'),
+  require('./images/imagesZap/7_Ladxido.jpg'),
+  require('./images/imagesZap/8_Guenda.jpg'),
+  require('./images/imagesZap/9_Bicu.jpg'),
+  require('./images/imagesZap/11_Guixhe.jpg'),
+  require('./images/imagesZap/12_Gubidxa.jpg'),
+  require('./images/imagesZap/14_Gueta.jpg'),
+  require('./images/imagesZap/15_Zuquii.jpg'),
+  require('./images/imagesZap/16_Muxe.jpg'),
+  require('./images/imagesZap/17_Gunaa.jpg'),
+  require('./images/imagesZap/18_Xigagueta.jpg'),
+  require('./images/imagesZap/19_Guelaguidi.jpg'),
+  require('./images/imagesZap/20_Belegui.jpg'),
+  require('./images/imagesZap/21_Bigu.jpg'),
+  require('./images/imagesZap/22_Bizi.jpg'),
+  require('./images/imagesZap/23_Baquizxava.jpg'),
+  require('./images/imagesZap/24_Binnigue.jpg'),
+  require('./images/imagesZap/25_Guichi.jpg'),
+  require('./images/imagesZap/26_Tanguyu.jpg'),
+  require('./images/imagesZap/27_Beeu.jpg'),
+  require('./images/imagesZap/28_Bigose.jpg'),
+  require('./images/imagesZap/29_Bizuudi.jpg'),
+  require('./images/imagesZap/30_Nisadxu.jpg'),
+  require('./images/imagesZap/32_Guiba.jpg'),
+  require('./images/imagesZap/33_Guzana.jpg'),
+  require('./images/imagesZap/34_Larindxo.jpg'),
+  require('./images/imagesZap/35_Binii.jpg'),
+  require('./images/imagesZap/36_Benda.jpg'),
+  require('./images/imagesZap/37_Bidxi.jpg'),
+  require('./images/imagesZap/38_Binidxaba.jpg'),
+  require('./images/imagesZap/39_Binniguiba.jpg'),
+  require('./images/imagesZap/40_Guchachi.jpg'),
+  require('./images/imagesZap/41_Benda.jpg'),
+  require('./images/imagesZap/42_Guiexhuuba.jpg'),
+  require('./images/imagesZap/43_Soon.jpg'),
+  require('./images/imagesZap/44_Yoo.jpg'),
+  require('./images/imagesZap/45_Xhuana.jpg'),
+  require('./images/imagesZap/46_Mango.jpg'),
+  require('./images/imagesZap/47_Marena.jpg'),
+  require('./images/imagesZap/48_Bidaani.jpg'),
+  require('./images/imagesZap/49_Luuna.jpg'),
+  require('./images/imagesZap/50_Guiechachi.jpg'),
+  require('./images/imagesZap/51_Beenda.jpg'),
+  require('./images/imagesZap/52_Tlayuda.jpg'),
+  require('./images/imagesZap/53_Gunaabenda.jpg'),
+  require('./images/imagesZap/54_Berengola.jpg'),
 ];
 
 const getRandomPairs = (numPairs) => {
@@ -59,13 +59,12 @@ const getRandomPairs = (numPairs) => {
 };
 
 const Memorama = ({ navigation }) => {
-  const [cards, setCards] = useState(getRandomPairs(10));
+  const [cards, setCards] = useState(getRandomPairs(5));
   const [flippedIndexes, setFlippedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
   const [gameWon, setGameWon] = useState(false);
   const [time, setTime] = useState(300);
   const [timerRunning, setTimerRunning] = useState(false);
-  const [attempts, setAttempts] = useState(20);
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
@@ -85,21 +84,16 @@ const Memorama = ({ navigation }) => {
       if (cards[firstIndex] === cards[secondIndex]) {
         setMatchedIndexes((prev) => [...prev, firstIndex, secondIndex]);
       }
-      setAttempts((prev) => prev - 1);
       setTimeout(() => setFlippedIndexes([]), 500);
     }
   }, [flippedIndexes]);
 
   useEffect(() => {
-    if (matchedIndexes.length === cards.length) {
+    if (matchedIndexes.length === cards.length && cards.length > 0) {
       setGameWon(true);
       setTimerRunning(false);
-    } else if (attempts === 0) { 
-      // Si ya ganó, no permitir que también active la derrota
-      setGameOver(true);
-      setTimerRunning(false);
     }
-  }, [matchedIndexes, attempts]);  
+  }, [matchedIndexes, cards]);
 
   const handlePress = (index) => {
     if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index)) {
@@ -109,13 +103,12 @@ const Memorama = ({ navigation }) => {
   };
 
   const restartGame = () => {
-    setCards(getRandomPairs(10));
+    setCards(getRandomPairs(5));
     setFlippedIndexes([]);
     setMatchedIndexes([]);
     setGameWon(false);
     setGameOver(false);
     setTime(300);
-    setAttempts(20);
     setTimerRunning(false);
   };
 
@@ -123,13 +116,13 @@ const Memorama = ({ navigation }) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-  };  
+  }; 
 
   return (
     <View style={styles.container}>
+
       <View style={styles.controls}>
         <Text style={styles.timerText}>TIEMPO RESTANTE{'\n'}{formatTime(time)}</Text>
-        <Text style={styles.attempts}>INTENTOS RESTANTES{'\n'}{attempts}</Text>
       </View>
 
       <View style={styles.grid}>
@@ -165,10 +158,8 @@ const Memorama = ({ navigation }) => {
       <Modal visible={gameOver} transparent={true} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText2}>¡Tiempo agotado!</Text>
-            <TouchableOpacity style={styles.button2} onPress={restartGame}>
-              <Text style={styles.buttonText}>INTENTAR DE NUEVO</Text>
-            </TouchableOpacity>
+            <Text style={styles.modalText}>¡Tiempo agotado!</Text>
+            <Button title="Intentar de nuevo" onPress={restartGame} />
           </View>
         </View>
       </Modal>
@@ -184,16 +175,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   controls: {
-    flexDirection: "row", 
-    justifyContent: "space-between", 
-    width: "100%",
-    paddingHorizontal: 10, 
+    flexDirection: 'row',
+    justifyContent: 'center', 
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+    marginTop: 20,
   },
-  attempts: {
-    fontSize: 15,
+  timerText: {
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center", 
     color: "#333",
+  },
+  timer: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
   },
   button: {
     borderColor: '#fff',
@@ -208,18 +206,6 @@ const styles = StyleSheet.create({
     alignItems: "center", 
     justifyContent: "center", 
   },
-  button2: {
-    borderColor: '#000',
-    borderRadius: 10,
-    marginVertical: 10,
-    width: '50%',
-    backgroundColor: 'red',
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-    borderBottomWidth: 4,
-    justifyContent: "center", 
-    padding: 10,
-  },
   buttonText: {
     color: '#fff',
     textAlign: 'center',
@@ -230,13 +216,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    marginTop: 10,
-  },
-  timerText: {
-    fontSize: 15,
-    fontWeight: "bold",
-    textAlign: "center", 
-    color: "#333",
   },
   card: {
     width: 70,
@@ -252,31 +231,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 0, 0, 0.5)',
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   modalBackground: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+  },
   modalText: {
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modalText2: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'red',
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',

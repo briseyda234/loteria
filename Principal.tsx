@@ -12,6 +12,10 @@ import NivelMedioEsp from './src/medioE';
 import NivelDificilEsp from './src/dificilE';
 import { Dimensions, ScrollView} from 'react-native';
 const { width, height } = Dimensions.get('window');
+
+import NivelFacilZap from './src/facilZ';
+import NivelMedioZap from './src/medioZ';
+import NivelDificilZap from './src/dificilZ';
 // Crear el stack de navegación
 const Stack = createStackNavigator();
 const Principal = () => {
@@ -150,6 +154,9 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
         <Stack.Screen name="NivelFacilEsp" component={NivelFacilEsp} options={{ headerShown: false }} />
         <Stack.Screen name="NivelMedioEsp" component={NivelMedioEsp} options={{ headerShown: false }} />
         <Stack.Screen name="NivelDificilEsp" component={NivelDificilEsp} options={{ headerShown: false }} />
+        <Stack.Screen name="NivelFacilZap" component={NivelFacilZap} options={{ headerShown: false }} />
+        <Stack.Screen name="NivelMedioZap" component={NivelMedioZap} options={{ headerShown: false }} />
+        <Stack.Screen name="NivelDificilZap" component={NivelDificilZap} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

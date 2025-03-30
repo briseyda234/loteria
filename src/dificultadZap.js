@@ -6,20 +6,20 @@ const Zapoteco = ({ navigation }) => {
     <ImageBackground source={require('./fondo/fondo1.jpg')} style={styles.background}>
       <View style={styles.container}>
         {/* Botón de regreso con icono */}
-        <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.back} onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('Idioma')}>
           <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
         </TouchableOpacity>
 
-        <Text style={styles.title}>Selecciona la dificultad:</Text>
+        <Text style={styles.title}>Selecciona la dificultad</Text>
         
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelFacilZap')}>
-          <Text style={styles.buttonText}>Fácil</Text>
+          <Text style={styles.buttonText}>FÁCIL</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelMedioZap')}>
-          <Text style={styles.buttonText}>Medio</Text>
+          <Text style={styles.buttonText}>MEDIO</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('NivelDificilZap')}>
-          <Text style={styles.buttonText}>Difícil</Text>
+          <Text style={styles.buttonText}>DIFÍCIL</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
