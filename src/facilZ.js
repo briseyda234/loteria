@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Sound from 'react-native-sound';
 import { View, TouchableOpacity, Image, StyleSheet, Modal, Text, Button, ImageBackground } from 'react-native';
+
+Sound.setCategory('Playback');
 
 const allImages = [
   require('./images/imagesZap/1_Ngupi.jpg'),
@@ -36,7 +39,7 @@ const allImages = [
   require('./images/imagesZap/38_Binidxaba.jpg'),
   require('./images/imagesZap/39_Binniguiba.jpg'),
   require('./images/imagesZap/40_Guchachi.jpg'),
-  require('./images/imagesZap/41_Benda.jpg'),
+  require('./images/imagesZap/41_Bendabuaa.jpg'),
   require('./images/imagesZap/42_Guiexhuuba.jpg'),
   require('./images/imagesZap/43_Soon.jpg'),
   require('./images/imagesZap/44_Yoo.jpg'),
@@ -52,6 +55,57 @@ const allImages = [
   require('./images/imagesZap/54_Berengola.jpg'),
 ];
 
+const allSounds = [
+  require('./assets/zap/1_ngupi.wav'),
+  require('./assets/zap/3_biuxi.wav'),
+  require('./assets/zap/5_miaxubi.wav'),
+  require('./assets/zap/7_ladxido.wav'),
+  require('./assets/zap/8_guendarati.wav'),
+  require('./assets/zap/9_bicu.wav'),
+  require('./assets/zap/11_guixhe.wav'),
+  require('./assets/zap/12_gubidxa.wav'),
+  require('./assets/zap/14_guetabigui.wav'),
+  require('./assets/zap/15_zuquii.wav'),
+  require('./assets/zap/16_muxe.wav'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/18_xigagueta.wav'),
+  require('./assets/zap/19_guelaguidi.wav'),
+  require('./assets/zap/20_belegui.wav'),
+  require('./assets/zap/21_bigu.wav'),
+  require('./assets/zap/22_bizi.wav'),
+  require('./assets/zap/23_baquizxava.wav'),
+  require('./assets/zap/24_binnigue.wav'),
+  require('./assets/zap/25_guichibiaagueta.wav'),
+  require('./assets/zap/26_tanguyu.wav'),
+  require('./assets/zap/27_beeu.wav'),
+  require('./assets/zap/28_bigose.wav'),
+  require('./assets/zap/29_bizuudi.wav'),
+  require('./assets/zap/30_nisadxuni.wav'),
+  require('./assets/zap/32_guibarusanii.wav'),
+  require('./assets/zap/33_guzana.wav'),
+  require('./assets/zap/34_larindxo.wav'),
+  require('./assets/zap/35_binniguuze.wav'),
+  require('./assets/zap/36_benda.wav'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/38_binidxaba.wav'),
+  require('./assets/zap/39_binniguiba.wav'),
+  require('./assets/zap/40_guchachi.wav'),
+  require('./assets/zap/41_bendabuaa.wav'),
+  require('./assets/zap/42_guiexhuuba.wav'),
+  require('./assets/zap/43_songuuzebenda.wav'),
+  require('./assets/zap/44_yoo.wav'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/48_bidaani.wav'),
+  require('./assets/zap/49_luuna.wav'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/sonido.mp3'),
+];
+
 const getRandomPairs = (numPairs) => {
   const shuffled = [...allImages].sort(() => Math.random() - 0.5);
   const selected = shuffled.slice(0, numPairs);
@@ -59,7 +113,7 @@ const getRandomPairs = (numPairs) => {
 };
 
 const Memorama = ({ navigation }) => {
-  const [cards, setCards] = useState(getRandomPairs(5));
+  const [cards, setCards] = useState(getRandomPairs(6));
   const [flippedIndexes, setFlippedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
   const [gameWon, setGameWon] = useState(false);
@@ -95,15 +149,50 @@ const Memorama = ({ navigation }) => {
     }
   }, [matchedIndexes, cards]);
 
-  const handlePress = (index) => {
+  /*const handlePress = (index) => {
     if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index)) {
       setFlippedIndexes([...flippedIndexes, index]);
       if (!timerRunning) setTimerRunning(true);
     }
-  };
+  };*/
+
+  const handlePress = (index) => {
+    if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index)) {
+      const newFlipped = [...flippedIndexes, index];
+      setFlippedIndexes(newFlipped);
+  
+      playSpecificSound(cards[index]); 
+  
+      if (!timerRunning) setTimerRunning(true);
+    }
+  };  
+
+  const playSpecificSound = (imageSource) => {
+    const imageIndex = allImages.findIndex(img => img === imageSource);
+
+    console.log('Índice de imagen:', imageIndex);
+    console.log('Ruta del sonido:', allSounds[imageIndex]);
+  
+    if (imageIndex !== -1 && allSounds[imageIndex]) {
+      //const sound = new Sound(`sounds/${allSounds[imageIndex]}`, Sound.MAIN_BUNDLE, (error) => {
+      const sound = new Sound(allSounds[imageIndex], (error) => {
+        if (error) {
+          console.log('Error al cargar el audio:', error);
+          return;
+        }
+  
+        sound.play((success) => {
+          if (!success) {
+            console.log('Error al reproducir sonido');
+          }
+          sound.release();
+        });
+      });
+    }
+  };  
 
   const restartGame = () => {
-    setCards(getRandomPairs(5));
+    setCards(getRandomPairs(6));
     setFlippedIndexes([]);
     setMatchedIndexes([]);
     setGameWon(false);
@@ -117,6 +206,26 @@ const Memorama = ({ navigation }) => {
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   }; 
+
+/*  const playSpecificSound = (imageSource) => {
+    const imageIndex = allImages.findIndex(img => img === imageSource);
+  
+    if (imageIndex !== -1 && allSounds[imageIndex]) {
+      const sound = new Sound(allSounds[imageIndex], Sound.MAIN_BUNDLE, (error) => {
+        if (error) {
+          console.log('Error al cargar el audio:', error);
+          return;
+        }
+  
+        sound.play((success) => {
+          if (!success) {
+            console.log('Error al reproducir sonido');
+          }
+          sound.release(); // Libera la memoria
+        });
+      });
+    }
+  };  */
 
   return (
     <View style={styles.container}>

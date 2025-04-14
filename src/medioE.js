@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Sound from 'react-native-sound';
 import { View, TouchableOpacity, Image, StyleSheet, Modal, Text, Button, ImageBackground } from 'react-native';
+
+Sound.setCategory('Playback');
 
 const allImages = [
   require('./images/imagesEsp/1_Armadillo.jpg'),
@@ -50,6 +53,57 @@ const allImages = [
   require('./images/imagesEsp/52_Tlayuda.jpg'),
   require('./images/imagesEsp/53_Sirena.jpg'),
   require('./images/imagesEsp/54_Gallo.jpg'),
+];
+
+const allSounds = [
+  require('./assets/esp/1_armadillo.wav'),
+  require('./assets/esp/3_mosquito.wav'),
+  require('./assets/esp/5_alacran.wav'),
+  require('./assets/esp/7_corazon.wav'),
+  require('./assets/esp/8_muerte.wav'),
+  require('./assets/esp/9_perro.wav'),
+  require('./assets/esp/11_hamaca.wav'),
+  require('./assets/esp/12_sol.wav'),
+  require('./assets/esp/14_totopo.wav'),
+  require('./assets/esp/15_horno.wav'),
+  require('./assets/esp/16_muxe.wav'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/18_jicalpextle.wav'),
+  require('./assets/esp/19_huarache.wav'),
+  require('./assets/esp/20_estrella.wav'),
+  require('./assets/esp/21_tortuga.wav'),
+  require('./assets/esp/22_tlacuache.wav'),
+  require('./assets/esp/23_tarantula.wav'),
+  require('./assets/esp/24_borracho.wav'),
+  require('./assets/esp/25_nopal.wav'),
+  require('./assets/esp/26_muneca.wav'),
+  require('./assets/esp/27_luna.wav'),
+  require('./assets/esp/28_zanate.wav'),
+  require('./assets/esp/29_enagua.wav'),
+  require('./assets/esp/30_mezcal.wav'),
+  require('./assets/esp/32_joya.wav'),
+  require('./assets/esp/33_mayordomo.wav'),
+  require('./assets/esp/34_bandera.wav'),
+  require('./assets/esp/35_pescador.wav'),
+  require('./assets/esp/36_mojarra.wav'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/38_diablito.wav'),
+  require('./assets/esp/39_soldado.wav'),
+  require('./assets/esp/40_iguana.wav'),
+  require('./assets/esp/41_camaron.wav'),
+  require('./assets/esp/42_jazmindelistmo.wav'),
+  require('./assets/esp/43_sondelpescado.wav'),
+  require('./assets/esp/44_casa.wav'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/48_huipil.wav'),
+  require('./assets/esp/49_catre.wav'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/sonido.mp3'),
 ];
 
 const getRandomPairs = (numPairs) => {
@@ -103,10 +157,39 @@ const Memorama = ({ navigation }) => {
 
   const handlePress = (index) => {
     if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index)) {
-      setFlippedIndexes([...flippedIndexes, index]);
+      //setFlippedIndexes([...flippedIndexes, index]);
+      const newFlipped = [...flippedIndexes, index];
+      setFlippedIndexes(newFlipped);
+  
+      playSpecificSound(cards[index]);
+
       if (!timerRunning) setTimerRunning(true);
     }
   };
+
+  const playSpecificSound = (imageSource) => {
+    const imageIndex = allImages.findIndex(img => img === imageSource);
+
+    console.log('Índice de imagen:', imageIndex);
+    console.log('Ruta del sonido:', allSounds[imageIndex]);
+  
+    if (imageIndex !== -1 && allSounds[imageIndex]) {
+      //const sound = new Sound(`sounds/${allSounds[imageIndex]}`, Sound.MAIN_BUNDLE, (error) => {
+      const sound = new Sound(allSounds[imageIndex], (error) => {
+        if (error) {
+          console.log('Error al cargar el audio:', error);
+          return;
+        }
+  
+        sound.play((success) => {
+          if (!success) {
+            console.log('Error al reproducir sonido');
+          }
+          sound.release();
+        });
+      });
+    }
+  };  
 
   const restartGame = () => {
     setCards(getRandomPairs(10));
