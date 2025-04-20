@@ -5,7 +5,7 @@ const { width, height } = Dimensions.get('window');
 const Idioma = ({ navigation }) => {
   return (
     <ImageBackground 
-      source={require('./fondo/fondo.jpeg')} 
+      source={require('./fondo/fondoprin.jpeg')} 
       style={styles.background}
     >
       <View style={styles.container}>
