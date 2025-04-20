@@ -113,11 +113,11 @@ const getRandomPairs = (numPairs) => {
 };
 
 const Memorama = ({ navigation }) => {
-  const [cards, setCards] = useState(getRandomPairs(10));
+  const [cards, setCards] = useState(getRandomPairs(15));
   const [flippedIndexes, setFlippedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
   const [gameWon, setGameWon] = useState(false);
-  const [time, setTime] = useState(300);
+  const [time, setTime] = useState(180);
   const [timerRunning, setTimerRunning] = useState(false);
   const [attempts, setAttempts] = useState(20);
   const [gameOver, setGameOver] = useState(false);
@@ -192,7 +192,7 @@ const Memorama = ({ navigation }) => {
   };
 
   const restartGame = () => {
-    setCards(getRandomPairs(10));
+    setCards(getRandomPairs(15));
     setFlippedIndexes([]);
     setMatchedIndexes([]);
     setGameWon(false);
@@ -322,8 +322,8 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   card: {
-    width: 70,
-    height: 100,
+    width: 68,
+    height: 120,
     margin: 5,
   },
   image: {

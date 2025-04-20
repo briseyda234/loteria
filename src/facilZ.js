@@ -327,8 +327,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   card: {
-    width: 70,
-    height: 100,
+    width: 120,
+    height: 170,
     margin: 5,
   },
   image: {

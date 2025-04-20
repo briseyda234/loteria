@@ -321,8 +321,8 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   card: {
-    width: 50,
-    height: 70,
+    width: 68,
+    height: 120,
     margin: 5,
   },
   image: {
