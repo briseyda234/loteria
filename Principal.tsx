@@ -103,7 +103,7 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
           <Text style={styles.text}>Ilustración{"\n"}López Cirilo Kevin Alexis</Text>
           <Text style={styles.text}>Traducción al zapoteco{"\n"}Orlando Vinicio Trujillo Orozco</Text>
           <Text style={styles.text}>Voz femenina en español-castellano{"\n"}Alquisiris Quecha Kelly</Text>
-          <Text style={styles.text}>Voz femenina en zapoteco{"\n"}Sánchez Vicente Jaqueline Guadalupe </Text>
+          <Text style={styles.text}>Voz femenina en zapoteco{"\n"}Sánchez Vicente Jacqueline Guadalupe </Text>
             <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación{"\n"}</Text>
             <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
   <Text style={styles.closeButtonText}>Cerrar</Text>

@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Sound from 'react-native-sound';
 import { View, TouchableOpacity, Image, StyleSheet, Modal, Text, Button, ImageBackground } from 'react-native';
+import { Dimensions } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
+
+const numColumns = 6;
+const cardMargin = 3;
+const cardWidth = (screenWidth - (cardMargin * 2 * numColumns)) / numColumns;
+const cardHeight = cardWidth * 1.5;
 
 Sound.setCategory('Playback');
 
@@ -67,7 +75,7 @@ const allSounds = [
   require('./assets/zap/14_guetabigui.wav'),
   require('./assets/zap/15_zuquii.wav'),
   require('./assets/zap/16_muxe.wav'),
-  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/gunaa.mp3'), //
   require('./assets/zap/18_xigagueta.wav'),
   require('./assets/zap/19_guelaguidi.wav'),
   require('./assets/zap/20_belegui.wav'),
@@ -86,7 +94,7 @@ const allSounds = [
   require('./assets/zap/34_larindxo.wav'),
   require('./assets/zap/35_binniguuze.wav'),
   require('./assets/zap/36_benda.wav'),
-  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/bidxi.mp3'), //
   require('./assets/zap/38_binidxaba.wav'),
   require('./assets/zap/39_binniguiba.wav'),
   require('./assets/zap/40_guchachi.wav'),
@@ -94,16 +102,16 @@ const allSounds = [
   require('./assets/zap/42_guiexhuuba.wav'),
   require('./assets/zap/43_songuuzebenda.wav'),
   require('./assets/zap/44_yoo.wav'),
-  require('./assets/zap/sonido.mp3'),
-  require('./assets/zap/sonido.mp3'),
-  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/xhuana.mp3'), //
+  require('./assets/zap/mango.mp3'), //
+  require('./assets/zap/marena.mp3'), //
   require('./assets/zap/48_bidaani.wav'),
   require('./assets/zap/49_luuna.wav'),
-  require('./assets/zap/sonido.mp3'),
-  require('./assets/zap/sonido.mp3'),
-  require('./assets/zap/sonido.mp3'),
-  require('./assets/zap/sonido.mp3'),
-  require('./assets/zap/sonido.mp3'),
+  require('./assets/zap/guiechachi.mp3'), //
+  require('./assets/zap/beenda.mp3'), //
+  require('./assets/zap/tlayuda.mp3'), //
+  require('./assets/zap/gunaabenda.mp3'), //
+  require('./assets/zap/berengola.mp3'), //
 ];
 
 const getRandomPairs = (numPairs) => {
@@ -279,35 +287,35 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   button: {
-    borderColor: '#fff',
+    //borderColor: '#fff',
     borderRadius: 10,
     marginVertical: 10,
     width: '40%',
     height: '40%',
-    backgroundColor: '#6200ee',
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-    borderBottomWidth: 4,
+    backgroundColor: '#8c8c8c',
+    //borderRightWidth: 2,
+    //borderLeftWidth: 2,
+    //borderBottomWidth: 4,
     alignItems: "center", 
     justifyContent: "center", 
   },
-  button2: {
-    borderColor: '#000',
-    borderRadius: 10,
-    marginVertical: 10,
-    width: '50%',
-    backgroundColor: 'red',
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-    borderBottomWidth: 4,
-    justifyContent: "center", 
-    padding: 10,
-  },
   buttonText: {
-    color: '#fff',
+    color: '#3c3c3c',
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  button2: {
+    //borderColor: '#000',
+    borderRadius: 10,
+    marginVertical: 10,
+    width: '50%',
+    backgroundColor: '#8c8c8c',
+    //borderRightWidth: 2,
+    //borderLeftWidth: 2,
+    //borderBottomWidth: 4,
+    justifyContent: "center", 
+    padding: 10,
   },
   grid: {
     flexDirection: 'row',
@@ -322,10 +330,10 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   card: {
-    width: 68,
-    height: 120,
-    margin: 5,
-  },
+    width: cardWidth,
+    height: cardHeight,
+    margin: cardMargin,
+  },  
   image: {
     width: '100%',
     height: '100%',
@@ -359,7 +367,7 @@ const styles = StyleSheet.create({
   modalText2: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'red',
+    color: '#515151',
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',

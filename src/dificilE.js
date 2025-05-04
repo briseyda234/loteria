@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Sound from 'react-native-sound';
 import { View, TouchableOpacity, Image, StyleSheet, Modal, Text, Button, ImageBackground } from 'react-native';
+import { Dimensions } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
+
+const numColumns = 6;
+const cardMargin = 3;
+const cardWidth = (screenWidth - (cardMargin * 2 * numColumns)) / numColumns;
+const cardHeight = cardWidth * 1.5;
 
 Sound.setCategory('Playback');
 
@@ -67,7 +75,7 @@ const allSounds = [
   require('./assets/esp/14_totopo.wav'),
   require('./assets/esp/15_horno.wav'),
   require('./assets/esp/16_muxe.wav'),
-  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/dama.mp3'), //
   require('./assets/esp/18_jicalpextle.wav'),
   require('./assets/esp/19_huarache.wav'),
   require('./assets/esp/20_estrella.wav'),
@@ -86,7 +94,7 @@ const allSounds = [
   require('./assets/esp/34_bandera.wav'),
   require('./assets/esp/35_pescador.wav'),
   require('./assets/esp/36_mojarra.wav'),
-  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/rana.mp3'), //
   require('./assets/esp/38_diablito.wav'),
   require('./assets/esp/39_soldado.wav'),
   require('./assets/esp/40_iguana.wav'),
@@ -94,16 +102,16 @@ const allSounds = [
   require('./assets/esp/42_jazmindelistmo.wav'),
   require('./assets/esp/43_sondelpescado.wav'),
   require('./assets/esp/44_casa.wav'),
-  require('./assets/esp/sonido.mp3'),
-  require('./assets/esp/sonido.mp3'),
-  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/xhuana.mp3'), //
+  require('./assets/esp/mango.mp3'), //
+  require('./assets/esp/marena.mp3'), //
   require('./assets/esp/48_huipil.wav'),
   require('./assets/esp/49_catre.wav'),
-  require('./assets/esp/sonido.mp3'),
-  require('./assets/esp/sonido.mp3'),
-  require('./assets/esp/sonido.mp3'),
-  require('./assets/esp/sonido.mp3'),
-  require('./assets/esp/sonido.mp3'),
+  require('./assets/esp/flormayo.mp3'), //
+  require('./assets/esp/serpiente.mp3'), //
+  require('./assets/esp/tlayuda.mp3'), //
+  require('./assets/esp/sirena.mp3'), //
+  require('./assets/esp/gallo.mp3'), //
 ];
 
 const getRandomPairs = (numPairs) => {
@@ -278,35 +286,35 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   button: {
-    borderColor: '#fff',
+    //borderColor: '#fff',
     borderRadius: 10,
     marginVertical: 10,
     width: '40%',
     height: '40%',
-    backgroundColor: '#6200ee',
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-    borderBottomWidth: 4,
+    backgroundColor: '#8c8c8c',
+    //borderRightWidth: 2,
+    //borderLeftWidth: 2,
+    //borderBottomWidth: 4,
     alignItems: "center", 
     justifyContent: "center", 
   },
-  button2: {
-    borderColor: '#000',
-    borderRadius: 10,
-    marginVertical: 10,
-    width: '50%',
-    backgroundColor: 'red',
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-    borderBottomWidth: 4,
-    justifyContent: "center", 
-    padding: 10,
-  },
   buttonText: {
-    color: '#fff',
+    color: '#3c3c3c',
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  button2: {
+    //borderColor: '#000',
+    borderRadius: 10,
+    marginVertical: 10,
+    width: '50%',
+    backgroundColor: '#8c8c8c',
+    //borderRightWidth: 2,
+    //borderLeftWidth: 2,
+    //borderBottomWidth: 4,
+    justifyContent: "center", 
+    padding: 10,
   },
   grid: {
     flexDirection: 'row',
@@ -321,10 +329,10 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   card: {
-    width: 68,
-    height: 120,
-    margin: 5,
-  },
+    width: cardWidth,
+    height: cardHeight,
+    margin: cardMargin,
+  },  
   image: {
     width: '100%',
     height: '100%',
@@ -358,7 +366,7 @@ const styles = StyleSheet.create({
   modalText2: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'red',
+    color: '#515151',
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
