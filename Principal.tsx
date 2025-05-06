@@ -32,7 +32,7 @@ const Principal = () => {
         console.log('Error al cargar la música:', error);
         return;
       }
-        music.setVolume(0.2); // Reducir el volumen al 30%
+        music.setVolume(0.1); // Reducir el volumen al 30%
       music.setNumberOfLoops(-1); // -1 para repetir infinito
       music.play(); // Inicia la música automáticamente
       setBackgroundMusic(music);

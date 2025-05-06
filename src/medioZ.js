@@ -129,7 +129,7 @@ const Memorama = ({ navigation }) => {
   const [timerRunning, setTimerRunning] = useState(false);
   const [attempts, setAttempts] = useState(20);
   const [gameOver, setGameOver] = useState(false);
-
+  const [modalVisible, setModalVisible] = useState(false);
   useEffect(() => {
     let timer;
     if (timerRunning && time > 0) {
@@ -218,11 +218,18 @@ const Memorama = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+       <View style={styles.topControls}>
+        {/* Botón de regreso con icono */}
+        <TouchableOpacity style={styles.back} onPress={() => setModalVisible(true)}>
+          <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
+        </TouchableOpacity>
+      
       <View style={styles.controls}>
         <Text style={styles.timerText}>TIEMPO RESTANTE{'\n'}{formatTime(time)}</Text>
         <Text style={styles.attempts}>INTENTOS RESTANTES{'\n'}{attempts}</Text>
       </View>
-
+      </View>
+   
       <View style={styles.grid}>
         {cards.map((card, index) => (
           <TouchableOpacity 
@@ -238,6 +245,37 @@ const Memorama = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </View>
+
+      <Modal transparent={true} visible={modalVisible} animationType="fade">
+  <View style={styles.modalBackground1}>
+    <View style={styles.modalContainer1}>
+      <Text style={styles.modalText1}>¿Estás seguro de abandonar el juego?</Text>
+      <View style={styles.buttonRow1}>
+        <TouchableOpacity
+          style={styles.buttonYes1}
+          onPress={() => {
+            setModalVisible(false);
+            if (navigation.canGoBack()) {
+              navigation.goBack();
+            } else {
+              navigation.navigate('Menu');
+            }
+          }}
+        >
+          <Text style={styles.buttonText1}>Sí</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonNo1}
+          onPress={() => setModalVisible(false)}
+        >
+          <Text style={styles.buttonText1}>No</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  </View>
+
+</Modal>
+
 
       <Modal visible={gameWon} transparent={true} animationType="slide">
         <ImageBackground source={require("./fondo/fondo.jpg")} style={styles.modalBackground} imageStyle={{opacity: 0.8}}>
@@ -378,6 +416,90 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: 25,
   },
+  backText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  backIcon: {
+    width: 30, // Ajusta el tamaño del icono
+    height: 30,
+    tintColor: '#fff', // Ajusta el color si es necesario
+  },
+  topControls: {
+   alignItems: 'center',
+   marginBottom: 20,
+   top:10,
+  },
+  back: {
+   right: 150,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+modalBackground1: {
+  flex: 1,
+  backgroundColor: 'rgba(0,0,0,0.5)',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
+modalContainer1: {
+ // backgroundColor: 'white',
+ backgroundColor: '#ef5350', // Fondo rojo cálido para el contenedor
+  padding: 20,
+  borderRadius: 10,
+  width: '80%',
+  alignItems: 'center',
+},
+modalText1: {
+  fontSize: 17,
+  marginBottom: 20,
+  textAlign: 'center',
+  fontFamily: 'sans-serif-light',
+  fontWeight: 'bold',
+  color: 'white', // Texto negro
+},
+buttonRow1: {
+  flexDirection: 'row',
+  gap: 20,
+},
+buttonYes1: {
+  fontFamily: 'sans-serif-light',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  //fontSize: 20,
+  backgroundColor: '#fff', // Fondo blanco
+  paddingHorizontal: 15,
+  paddingVertical: 10,
+  borderRadius: 8,
+  borderWidth: 2,
+  borderColor: '#fff',
+  
+},
+
+buttonNo1: {
+  fontFamily: 'sans-serif-light',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  //fontSize: 20,
+  backgroundColor: '#fff', // rojo claro
+  paddingHorizontal: 15,
+  paddingVertical: 10,
+  borderRadius: 8,
+  borderWidth: 2,
+  borderColor: '#fff',
+},
+buttonText1: {
+  fontFamily: 'sans-serif-light',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  fontSize: 20,
+  color: '#000', // Texto negro
+ // paddingHorizontal: 10,
+  //paddingVertical: 5,
+
+},
 });
 
 export default Memorama;
