@@ -290,7 +290,7 @@ const Memorama = ({ navigation }) => {
       <Modal visible={gameOver} transparent={true} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText2}>¡Tiempo agotado!</Text>
+            <Text style={styles.modalText2}>¡Intentos agotados!</Text>
               <TouchableOpacity style={styles.button2} onPress={restartGame}>
                 <Text style={styles.buttonText}>INTENTAR DE NUEVO</Text>
               </TouchableOpacity>
