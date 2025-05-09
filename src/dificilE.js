@@ -128,7 +128,8 @@ const Memorama = ({ navigation }) => {
   const [time, setTime] = useState(180);
   const [timerRunning, setTimerRunning] = useState(false);
   const [attempts, setAttempts] = useState(20);
-  const [gameOver, setGameOver] = useState(false);
+  //const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState({ ended: false, reason: '' });
   const [modalVisible, setModalVisible] = useState(false);
   useEffect(() => {
     let timer;
@@ -136,7 +137,8 @@ const Memorama = ({ navigation }) => {
       timer = setInterval(() => setTime((prev) => prev - 1), 1000);
     } else if (time === 0) {
       setTimerRunning(false);
-      setGameOver(true);
+      //setGameOver(true);
+      setGameOver({ ended: true, reason: 'time' }); // Tiempo agotado
     }
     return () => clearInterval(timer);
   }, [timerRunning, time]);
@@ -158,7 +160,8 @@ const Memorama = ({ navigation }) => {
       setTimerRunning(false);
     }
     if (attempts === 0) {
-      setGameOver(true);
+      //setGameOver(true);
+      setGameOver({ ended: true, reason: 'attempts' }); // Intentos agotados
       setTimerRunning(false);
     }
   }, [matchedIndexes, attempts]);
@@ -203,8 +206,9 @@ const Memorama = ({ navigation }) => {
     setFlippedIndexes([]);
     setMatchedIndexes([]);
     setGameWon(false);
-    setGameOver(false);
-    setTime(300);
+    //setGameOver(false);
+    setGameOver({ ended: false, reason: '' });
+    setTime(180);
     setAttempts(20);
     setTimerRunning(false);
   };
@@ -217,15 +221,14 @@ const Memorama = ({ navigation }) => {
   
     return (
       <View style={styles.container}>
-         <View style={styles.topControls}>
                 {/* Botón de regreso con icono */}
-                <TouchableOpacity style={styles.back} onPress={() => setModalVisible(true)}>
-                  <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
-                </TouchableOpacity>
+        <TouchableOpacity style={styles.back} onPress={() => setModalVisible(true)}>
+          <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
+        </TouchableOpacity>
+        
         <View style={styles.controls}>
-          <Text style={styles.timerText}>TIEMPO RESTANTE{'\n'}{formatTime(time)}</Text>
-          <Text style={styles.attempts}>INTENTOS RESTANTES{'\n'}{attempts}</Text>
-        </View>
+          <Text style={styles.timerText}>TIEMPO RESTANTE: {formatTime(time)}</Text>
+          <Text style={styles.attempts}>INTENTOS RESTANTES: {attempts}</Text>
         </View>
 
       <View style={styles.grid}>
@@ -287,7 +290,7 @@ const Memorama = ({ navigation }) => {
         </ImageBackground>
       </Modal>
       
-      <Modal visible={gameOver} transparent={true} animationType="slide">
+      {/*<Modal visible={gameOver} transparent={true} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText2}>¡Intentos agotados!</Text>
@@ -296,7 +299,23 @@ const Memorama = ({ navigation }) => {
               </TouchableOpacity>
           </View>
         </View>
+      </Modal>*/}
+
+      <Modal visible={gameOver.ended} transparent={true} animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText2}>
+              {gameOver.reason === 'time'
+                ? '¡El tiempo se ha acabado!'
+                : '¡Intentos agotados!'}
+            </Text>
+            <TouchableOpacity style={styles.button2} onPress={restartGame}>
+              <Text style={styles.buttonText}>INTENTAR DE NUEVO</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </Modal>
+
     </View>
   );
 };
@@ -309,10 +328,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f0f0f0',
   },
   controls: {
-    flexDirection: "row", 
-    justifyContent: "space-between", 
-    width: "100%",
-    paddingHorizontal: 10, 
+    flexDirection: 'column',
+    justifyContent: 'center', 
+    alignItems: 'center',
+    width: '100%',
+    paddingVertical: 10,
+    marginTop: -50, 
   },
   attempts: {
     fontSize: 15,
@@ -322,11 +343,11 @@ const styles = StyleSheet.create({
   },
   button: {
     //borderColor: '#fff',
-    borderRadius: 10,
+    //borderRadius: 10,
     marginVertical: 10,
     width: '40%',
     height: '40%',
-    backgroundColor: '#8c8c8c',
+    backgroundColor: 'rgb(255, 251, 251)',
     //borderRightWidth: 2,
     //borderLeftWidth: 2,
     //borderBottomWidth: 4,
@@ -334,21 +355,21 @@ const styles = StyleSheet.create({
     justifyContent: "center", 
   },
   buttonText: {
-    color: '#3c3c3c',
+    color: 'rgb(104, 95, 95)',
     textAlign: 'center',
     fontSize: 18,
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
   },
   button2: {
     //borderColor: '#000',
-    borderRadius: 10,
+    //borderRadius: 10,
     marginVertical: 10,
     width: '50%',
-    backgroundColor: '#8c8c8c',
+    backgroundColor: 'rgb(233, 233, 233)',
     //borderRightWidth: 2,
     //borderLeftWidth: 2,
     //borderBottomWidth: 4,
-    justifyContent: "center", 
+    //justifyContent: "center", 
     padding: 10,
   },
   grid: {
@@ -391,16 +412,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 25,
+    //fontWeight: 'bold',
+    color: 'rgb(255, 251, 251)',
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
   modalText2: {
-    fontSize: 30,
-    fontWeight: 'bold',
+    fontSize: 25,
+    //fontWeight: 'bold',
     color: '#515151',
     textAlign: 'center',
     alignItems: 'center',

@@ -80,7 +80,7 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
           <Text style={styles.title}>ZAPOTECA</Text>
         </View>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Idioma')}>
-    <Text style={styles.buttonText}>Iniciar Juego</Text>
+    <Text style={styles.buttonText}>INICIAR JUEGO</Text>
   </TouchableOpacity>
       </View>
 
@@ -94,7 +94,7 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
             <Image source={require('./assets/images/logo.jpg')} style={styles.modalImage} />
             <Text style={styles.title1}>Créditos</Text>
             <Text style={styles.text}>Proyecto: {"\n"}"Memorama Zapoteca"</Text>
-          <Text style={styles.text}>Directora de proyecto--Diseño e ilustración{"\n"}M.A.V. Martha Patricia Luna González</Text>
+          <Text style={styles.text}>Directora de proyecto - Diseño e ilustración{"\n"}M.A.V. Martha Patricia Luna González</Text>
           <Text style={styles.text}>Especialista externo{"\n"}M.C.C. Nieva García Omar Santiago</Text>
           <Text style={styles.text}>Desarrollo{"\n"}Vásquez Camacho Leydi Francisca</Text>
           <Text style={styles.text}>Desarrollo{"\n"}Silva López Briseyda</Text>
@@ -102,11 +102,11 @@ function HomeScreen({ modalVisible, setModalVisible, navigation }: { modalVisibl
           <Text style={styles.text}>Ilustración{"\n"}Hernández Gómez Leibniz</Text>
           <Text style={styles.text}>Ilustración{"\n"}López Cirilo Kevin Alexis</Text>
           <Text style={styles.text}>Traducción al zapoteco{"\n"}Orlando Vinicio Trujillo Orozco</Text>
-          <Text style={styles.text}>Voz femenina en español-castellano{"\n"}Alquisiris Quecha Kelly</Text>
+          <Text style={styles.text}>Voz femenina en español - castellano{"\n"}Alquisiris Quecha Kelly</Text>
           <Text style={styles.text}>Voz femenina en zapoteco{"\n"}Sánchez Vicente Jacqueline Guadalupe </Text>
-            <Text style={styles.text}>Carrera: {"\n"}Ingeniería en Computación{"\n"}</Text>
+            <Text style={styles.text}>Carrera {"\n"}Ingeniería en Computación{"\n"}</Text>
             <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-  <Text style={styles.closeButtonText}>Cerrar</Text>
+  <Text style={styles.closeButtonText}>CERRAR</Text>
 </TouchableOpacity>
             </ScrollView>
           </View>
@@ -265,14 +265,14 @@ width:'100%',
   },
   button: {
     padding: 10,
-    borderColor: '#fff',
-    borderRadius: 10,
+    //borderColor: '#fff',
+    //borderRadius: 10,
     marginVertical: 10,
     width: '60%',
     backgroundColor: 'rgb(255, 251, 251)',
-    borderRightWidth: 2,
-    borderLeftWidth: 2,
-    borderBottomWidth: 2,
+    //borderRightWidth: 2,
+    //borderLeftWidth: 2,
+    //borderBottomWidth: 2,
   },
   buttonText: {
     fontFamily:'sans-serif-light',
@@ -284,13 +284,13 @@ width:'100%',
   closeButton:{
     backgroundColor: 'rgb(255, 251, 251)', // Rojo vibrante
     padding: 10,
-    borderColor: '#fff',
+    //borderColor: '#fff',
     marginVertical: 10,
-    borderRadius: 10,
+    //borderRadius: 10,
     alignSelf: 'center', // Centrar el botón dentro del modal
-    borderRightWidth: 2,
-    borderLeftWidth: 4,
-    borderBottomWidth: 2,
+    //borderRightWidth: 2,
+    //borderLeftWidth: 4,
+    //borderBottomWidth: 2,
     width:'60%'
   },
   closeButtonText: {

@@ -238,10 +238,9 @@ const Memorama = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Botón de regreso con icono */}
-            <TouchableOpacity style={styles.back} onPress={() => setModalVisible(true)}>
-                    <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
-                  </TouchableOpacity>
-           <View style={styles.controls}></View>
+      <TouchableOpacity style={styles.back} onPress={() => setModalVisible(true)}>
+        <Image source={require('../assets/iconos/deshacer.png')} style={styles.backIcon} />
+      </TouchableOpacity>
       <View style={styles.controls}>
         <Text style={styles.timerText}>TIEMPO RESTANTE{'\n'}{formatTime(time)}</Text>
       </View>
@@ -306,14 +305,26 @@ const Memorama = ({ navigation }) => {
         </ImageBackground>
       </Modal>
 
+      {/*<Modal visible={gameOver} transparent={true} animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>¡El tiempo se ha acabado!</Text>
+            <Button title="INTENTAR DE NUEVO" onPress={restartGame} />
+          </View>
+        </View>
+      </Modal>*/}
+
       <Modal visible={gameOver} transparent={true} animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>¡Tiempo agotado!</Text>
-            <Button title="Intentar de nuevo" onPress={restartGame} />
+            <Text style={styles.modalText2}>¡El tiempo se ha acabado!</Text>
+              <TouchableOpacity style={styles.button2} onPress={restartGame}>
+                <Text style={styles.buttonText}>INTENTAR DE NUEVO</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </Modal>
+
     </View>
   );
 };
@@ -346,11 +357,11 @@ const styles = StyleSheet.create({
   },
   button: {
     //borderColor: '#fff',
-    borderRadius: 10,
+    //borderRadius: 10,
     marginVertical: 10,
     width: '40%',
     height: '40%',
-    backgroundColor: '#8c8c8c',
+    backgroundColor: 'rgb(255, 251, 251)',
     //borderRightWidth: 2,
     //borderLeftWidth: 2,
     //borderBottomWidth: 4,
@@ -358,10 +369,22 @@ const styles = StyleSheet.create({
     justifyContent: "center", 
   },
   buttonText: {
-    color: '#3c3c3c',
+    color: 'rgb(104, 95, 95)',
     textAlign: 'center',
     fontSize: 18,
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
+  },
+  button2: {
+    //borderColor: '#000',
+    //borderRadius: 10,
+    marginVertical: 10,
+    width: '50%',
+    backgroundColor: 'rgb(233, 233, 233)',
+    //borderRightWidth: 2,
+    //borderLeftWidth: 2,
+    //borderBottomWidth: 4,
+    //justifyContent: "center", 
+    padding: 10,
   },
   grid: {
     flexDirection: 'row',
@@ -378,11 +401,19 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 5,
   },
+  modalText2: {
+    fontSize: 25,
+    //fontWeight: 'bold',
+    color: '#515151',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(255, 0, 0, 0.5)',
   },
   modalBackground: {
     flex: 1,
@@ -391,12 +422,14 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#fff',
+    padding: 20,
     borderRadius: 10,
+    alignItems: 'center',
   },
   modalText: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: 25,
+    //fontWeight: 'bold',
+    color: 'rgb(255, 251, 251)',
     textAlign: 'center',
     alignItems: 'center',
     justifyContent: 'center',
