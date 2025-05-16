@@ -127,7 +127,7 @@ const Memorama = ({ navigation }) => {
   const [gameWon, setGameWon] = useState(false);
   const [time, setTime] = useState(180);
   const [timerRunning, setTimerRunning] = useState(false);
-  const [attempts, setAttempts] = useState(20);
+  //const [attempts, setAttempts] = useState(20);
   //const [gameOver, setGameOver] = useState(false);
   const [gameOver, setGameOver] = useState({ ended: false, reason: '' });
   const [modalVisible, setModalVisible] = useState(false);
@@ -144,27 +144,27 @@ const Memorama = ({ navigation }) => {
   }, [timerRunning, time]);
 
   useEffect(() => {
-    if (flippedIndexes.length === 2) {
-      const [firstIndex, secondIndex] = flippedIndexes;
-      if (cards[firstIndex] === cards[secondIndex]) {
-        setMatchedIndexes((prev) => [...prev, firstIndex, secondIndex]);
+      if (flippedIndexes.length === 2) {
+        const [firstIndex, secondIndex] = flippedIndexes;
+        if (cards[firstIndex] === cards[secondIndex]) {
+          setMatchedIndexes((prev) => [...prev, firstIndex, secondIndex]);
+        }
+        //setAttempts((prev) => prev - 1);
+        setTimeout(() => setFlippedIndexes([]), 200);
       }
-      setAttempts((prev) => prev - 1);
-      setTimeout(() => setFlippedIndexes([]), 500);
-    }
-  }, [flippedIndexes]);
+    }, [flippedIndexes]);
 
   useEffect(() => {
     if (matchedIndexes.length === cards.length) {
       setGameWon(true);
       setTimerRunning(false);
     }
-    if (attempts === 0) {
+    /*if (attempts === 0) {
       //setGameOver(true);
       setGameOver({ ended: true, reason: 'attempts' }); // Intentos agotados
       setTimerRunning(false);
-    }
-  }, [matchedIndexes, attempts]);
+    }*/
+  }, [matchedIndexes]);
 
   const handlePress = (index) => {
     if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index)) {
@@ -209,7 +209,7 @@ const Memorama = ({ navigation }) => {
     //setGameOver(false);
     setGameOver({ ended: false, reason: '' });
     setTime(180);
-    setAttempts(20);
+    //setAttempts(20);
     setTimerRunning(false);
   };
 
@@ -227,8 +227,8 @@ const Memorama = ({ navigation }) => {
         </TouchableOpacity>
         
         <View style={styles.controls}>
-          <Text style={styles.timerText}>TIEMPO RESTANTE: {formatTime(time)}</Text>
-          <Text style={styles.attempts}>INTENTOS RESTANTES: {attempts}</Text>
+          <Text style={styles.timerText}>TIEMPO RESTANTE{'\n'}{formatTime(time)}</Text>
+          {/*<Text style={styles.attempts}>INTENTOS RESTANTES: {attempts}</Text>*/}
         </View>
 
       <View style={styles.grid}>
@@ -305,9 +305,7 @@ const Memorama = ({ navigation }) => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalText2}>
-              {gameOver.reason === 'time'
-                ? '¡El tiempo se ha acabado!'
-                : '¡Intentos agotados!'}
+              ¡El tiempo se ha acabado!
             </Text>
             <TouchableOpacity style={styles.button2} onPress={restartGame}>
               <Text style={styles.buttonText}>INTENTAR DE NUEVO</Text>
@@ -379,7 +377,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   timerText: {
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: "bold",
     textAlign: "center", 
     color: "#333",

@@ -125,7 +125,7 @@ const Memorama = ({ navigation }) => {
   const [flippedIndexes, setFlippedIndexes] = useState([]);
   const [matchedIndexes, setMatchedIndexes] = useState([]);
   const [gameWon, setGameWon] = useState(false);
-  const [time, setTime] = useState(300);
+  const [time, setTime] = useState(180);
   const [timerRunning, setTimerRunning] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -205,7 +205,7 @@ const Memorama = ({ navigation }) => {
     setMatchedIndexes([]);
     setGameWon(false);
     setGameOver(false);
-    setTime(300);
+    setTime(180);
     setTimerRunning(false);
   };
 
