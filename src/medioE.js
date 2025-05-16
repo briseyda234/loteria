@@ -143,14 +143,22 @@ const Memorama = ({ navigation }) => {
     return () => clearInterval(timer);
   }, [timerRunning, time]);
 
+  const [isChecking, setIsChecking] = useState(false);
+
   useEffect(() => {
-    if (flippedIndexes.length === 2) {
+    if (flippedIndexes.length === 2 && !isChecking) {
+      setIsChecking(true);
       const [firstIndex, secondIndex] = flippedIndexes;
       if (cards[firstIndex] === cards[secondIndex]) {
         setMatchedIndexes((prev) => [...prev, firstIndex, secondIndex]);
       }
-      //setAttempts((prev) => prev - 1);
-      setTimeout(() => setFlippedIndexes([]), 500);
+  
+      const timeout = setTimeout(() => {
+        setFlippedIndexes([]);
+        setIsChecking(false);
+      }, 200);
+  
+      return () => clearTimeout(timeout);
     }
   }, [flippedIndexes]);
 
@@ -166,13 +174,10 @@ const Memorama = ({ navigation }) => {
   }, [matchedIndexes]);  
 
   const handlePress = (index) => {
-    if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index)) {
-      //setFlippedIndexes([...flippedIndexes, index]);
+    if (!flippedIndexes.includes(index) && !matchedIndexes.includes(index) && flippedIndexes.length < 2 && !isChecking) {
       const newFlipped = [...flippedIndexes, index];
       setFlippedIndexes(newFlipped);
-  
       playSpecificSound(cards[index]);
-
       if (!timerRunning) setTimerRunning(true);
     }
   };
